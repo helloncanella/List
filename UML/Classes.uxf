@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>8</zoom_level>
+  <help_text>// Uncomment the following line to change the fontsize and font:
+fontsize=10
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>952</x>
-      <y>128</y>
-      <w>208</w>
-      <h>152</h>
+      <x>990</x>
+      <y>36</y>
+      <w>156</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>**File System**
 --
@@ -28,10 +52,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>584</x>
-      <y>112</y>
-      <w>192</w>
-      <h>168</h>
+      <x>714</x>
+      <y>24</y>
+      <w>144</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>**StartUp**
 --
@@ -51,10 +75,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>120</y>
-      <w>280</w>
-      <h>184</h>
+      <x>456</x>
+      <y>30</y>
+      <w>210</w>
+      <h>138</h>
     </coordinates>
     <panel_attributes>**Navigation**
 --
@@ -78,10 +102,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>512</x>
-      <y>184</y>
-      <w>88</w>
-      <h>24</h>
+      <x>660</x>
+      <y>78</y>
+      <w>66</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
@@ -89,10 +113,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>176</y>
-      <w>200</w>
-      <h>40</h>
+      <x>852</x>
+      <y>72</y>
+      <w>150</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-
 m2=1
@@ -102,21 +126,21 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>184</x>
-      <y>296</y>
-      <w>184</w>
-      <h>176</h>
+      <x>624</x>
+      <y>162</y>
+      <w>66</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;200.0;210.0;10.0</additional_attributes>
+    <additional_attributes>90.0;140.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>64</x>
-      <y>456</y>
-      <w>288</w>
-      <h>168</h>
+      <x>582</x>
+      <y>246</y>
+      <w>216</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>**Login**
 --
@@ -127,20 +151,21 @@ verify if an user is logged &gt;</panel_attributes>
 --
 + render: Component
 - compomentDidMount: void
-+ goToPartiesList
+- goToPartiesList
 --
 *Responsibilities*
--- Allow user to log to Facebook or Instagram
+-- Allow user to log to Facebook or Instagram.
+-- Show login error messages
   </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>464</x>
-      <y>480</y>
-      <w>80</w>
-      <h>24</h>
+      <x>858</x>
+      <y>264</y>
+      <w>60</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>File System</panel_attributes>
     <additional_attributes/>
@@ -148,48 +173,212 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>344</x>
-      <y>472</y>
-      <w>136</w>
-      <h>40</h>
+      <x>792</x>
+      <y>258</y>
+      <w>78</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-
 m2=1
 saveUserData &gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
-      <y>600</y>
-      <w>168</w>
-      <h>120</h>
+      <x>846</x>
+      <y>318</y>
+      <w>126</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>Database
 --
 /Library/
 --
 - meteor: Meteor
+- partyListSubscrition
+- userDataSubscrition
+- partySubscrition
 --
 + loginToFacebook: User
++ isPartyDataLoading: MeteorHandle
++ isPartiesListLoading: MeteorHandle
++ isUserDataLoading: MeteorHandle
++ toggleUserSubscribtionToParty(partyId)
++ 
 --
 *Responsibilities*
 -- Serve as proxy to Meteor
--- Provide user Data</panel_attributes>
+-- Provide user Data
+-- List and unlist user from a party
+-- Provide party data
+-- Provide List of parties</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>344</x>
-      <y>600</y>
-      <w>152</w>
-      <h>40</h>
+      <x>792</x>
+      <y>318</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-
 m2=1
 fetches user &gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>162</y>
+      <w>102</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>282</x>
+      <y>258</y>
+      <w>216</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>**PartyList**
+--
+/UI Component/
+--
+- parties: [] PartyItem
+- navigator: Navigator
+--
++ render: Component
+- compomentDidMount: void
+- selectParty(partyId:String) :void
+--
+*Responsibilities*
+-- Offer a logout button TODO: DELEGATE RESPONSABILITY
+-- Render Parties
+-- Allow party selection
+  </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>162</y>
+      <w>18</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;430.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>420</y>
+      <w>216</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>**PartyDetails**
+--
+/UI Component/
+--
+- partyId: String
+- partyData: Party
+- navigator: Navigator
+--
++ render: Component
+- getPartyData: void
+- selectParty(partyId:String) :void
+- fetchUserId
+- subscribeUser
+- unsubscribeUser
+- comeBack
+--
+*Responsibilities*
+-- Get Party Data
+-- Offer a button to the user subscribe to the party
+-- Allow the user to unsbscreibe to the party
+  </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>654</x>
+      <y>444</y>
+      <w>78</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=1
+getUserData &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>450</y>
+      <w>60</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>File System</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>654</x>
+      <y>498</y>
+      <w>78</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=1
+getPartyData &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>504</y>
+      <w>60</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>Database
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>288</y>
+      <w>78</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=1
+&lt; getPartiesListData </panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>288</y>
+      <w>60</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>Database
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
