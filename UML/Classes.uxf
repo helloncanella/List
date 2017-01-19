@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>952</x>
+      <y>128</y>
+      <w>208</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>**File System**
+--
+/Library/
+--
+- user: Data
+- asyncStorage: AsyncStorage
+--
++ getUserData: User
++ saveUserData: void
++ userIsLogged: boolean
+--
+/Responsibilities/
++ Store userData of logged user
++ Inform when requested</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>112</y>
+      <w>192</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>**StartUp**
+--
+/UI Component/
+--
+- navigator: Navigator
+- fileSystem: fileSystem
+--
++ render: Component
+- compomentDidMount: void
+--
+*Responsibilities*
+-- Initiate the app
+  </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>120</y>
+      <w>280</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>**Navigation**
+--
+/UI Component/
+--
+- routes: [] Route
+- initialRoute: Route
+- userData: string
+--
+- goToPartiesList: void
+- goToLoginPage : void
+- componentDidMount: void
+--
+/Responsibilities/
++ Do initial route.
++ Route app
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>184</y>
+      <w>88</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>176</y>
+      <w>200</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=1
+verify if an user is logged &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>184</x>
+      <y>296</y>
+      <w>184</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>64</x>
+      <y>456</y>
+      <w>288</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>**Login**
+--
+/UI Component/
+--
+- navigator: Navigator
+- fileSystem: fileSystem
+--
++ render: Component
+- compomentDidMount: void
++ goToPartiesList
+--
+*Responsibilities*
+-- Allow user to log to Facebook or Instagram
+  </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>464</x>
+      <y>480</y>
+      <w>80</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>File System</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>472</y>
+      <w>136</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=1
+saveUserData &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>600</y>
+      <w>168</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Database
+--
+/Library/
+--
+- meteor: Meteor
+--
++ loginToFacebook: User
+--
+*Responsibilities*
+-- Serve as proxy to Meteor
+-- Provide user Data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>600</y>
+      <w>152</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=1
+fetches user &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+</diagram>
