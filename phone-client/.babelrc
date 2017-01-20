@@ -1,3 +1,32 @@
 {
-"presets": ["react-native"]
+    "presets": [
+        "react-native"
+    ],
+    "plugins": [
+        [
+            "module-alias",
+            [
+                {
+                    "src": "./app",
+                    "expose": "app"
+                },
+                {
+                    "src": "./app/library",
+                    "expose": "library"
+                },
+                {
+                    "src": "./app/ui/components",
+                    "expose": "ui/components"
+                },
+                {
+                    "src": "./app/ui/pages",
+                    "expose": "ui/pages"
+                },
+                {
+                    "src": "./app/ui/stylesheets",
+                    "expose": "ui/stylesheets"
+                }
+            ]
+        ]
+    ]
 }
