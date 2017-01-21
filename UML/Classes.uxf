@@ -207,7 +207,7 @@ saveUserData &gt;</panel_attributes>
 + isPartiesListLoading: MeteorHandle
 + isUserDataLoading: MeteorHandle
 + toggleUserSubscribtionToParty(partyId)
-+ 
++ loggedUser
 --
 *Responsibilities*
 -- Serve as proxy to Meteor
