@@ -82,11 +82,7 @@ class Database {
             .logInWithReadPermissions(['public_profile'])
             .then(onSucess, printError);
     }
-
-    saveUserData(userData) {
-        this.userData = userData
-    }
-
+    
     userIsLogged() {
         return !!this.loggedUser()
     }
