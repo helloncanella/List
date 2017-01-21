@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
+// import { StartUp } from 'app/start-up.js'
 import { StartUp } from 'app/start-up.js'
 
 export default class UListMe extends Component {
