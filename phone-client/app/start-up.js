@@ -24,6 +24,7 @@ export class StartUp extends Component {
 	}
 
 	onDatabaseConnected() {
+		
 		this.setState({
 			databaseConnected: true,
 			userIsLogged: database.userIsLogged()

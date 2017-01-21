@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, Navigator } from 'react-native'
-import { Login } from 'ui/pages/login.js'
-import {PartiesList} from 'ui/pages/parties-list.js'
+import Login from 'ui/pages/login.js'
+import PartiesList from 'ui/pages/parties-list.js'
 
 export class Navigation extends Component {
 

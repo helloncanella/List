@@ -4,7 +4,7 @@ import { typography, pressStyle } from 'ui/stylesheets/global.js'
 import {database} from 'library/database.js'
 import Meteor from 'react-native-meteor'
 
-export class PartiesList extends Component {
+export default class PartiesList extends Component {
 
     constructor(){
         super()

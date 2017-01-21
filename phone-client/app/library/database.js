@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native'
-import Meteor from 'react-native-meteor';
+import Meteor, { createContainer } from 'react-native-meteor';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 
 var printError = (err) => alert(err)
@@ -9,6 +9,9 @@ class Database {
 
     constructor() {
         this.meteorLogin = this.meteorLogin.bind(this)
+        this.createContainer = createContainer
+        this.call = Meteor.call
+        this.collection = Meteor.collection
     }
 
     connect() {
@@ -16,19 +19,20 @@ class Database {
 
         return new Promise((resolve, reject) => {
             const
-                onError = error => reject(error)
+                onError = error => reject(error),
                 onConnected = () => this.resumeLogin().then(resolve).catch(onError)
-            
-            Meteor.ddp.on('connected', onConnected)          
-            setTimeout(() => {reject('Problemas de Conexão!')}, 300*60)
+
+            Meteor.ddp.on('connected', onConnected)
+            setTimeout(() => { reject('Problemas de Conexão!') }, 300 * 60)
         })
-   }
+    }
 
     getAcessToken() {
         return AccessToken.getCurrentAccessToken()
     }
 
     resumeLogin() {
+
         const {meteorLogin} = this
         return this.getAcessToken().then(meteorLogin)
     }
@@ -49,43 +53,43 @@ class Database {
         Meteor._userIdSaved = userId;
     }
 
-    meteorLogin(data, callback) {
+
+    meteorLogin(data) {
         const self = this
-
+    
         return new Promise((resolve, reject) => {
-            if(!data) resolve()
+            if (!data) resolve()
 
-            else {
-                const onEnd = (err, result) => {
-                    if (err) reject (err)
-                    else {
-                        self.storeLoginData(result.token, result.id)
-                        if (callback) callback()
-                        resolve()
-                    }
-                }
-                Meteor.call('login', { facebook: data }, onEnd);
+            const onEnd = (err, result) => {
+                if (err) reject(err)
+                self.storeLoginData(result.token, result.id)
+                resolve()
             }
+
+            Meteor.call('login', { facebook: data }, onEnd);
         })
 
     }
 
-    loginWithFacebook(callback) {
+    loginWithFacebook() {
         const {meteorLogin} = this
 
         const onSucess = (result) => {
-            if (result.isCancelled) alert('Login cancelled');
-            else this.getAcessToken().then(data => meteorLogin(data, callback))
+            if (result.isCancelled) throw ('Login cancelled');
+            else this.getAcessToken().then(meteorLogin)
         }
 
-        LoginManager
+        return LoginManager
             .logInWithReadPermissions(['public_profile'])
-            .then(onSucess, printError);
+            .then(onSucess)
+            .catch(err => { throw err })
+
     }
-    
+
     userIsLogged() {
         return !!this.loggedUser()
     }
+
 }
 
 Database.propTypes = {}

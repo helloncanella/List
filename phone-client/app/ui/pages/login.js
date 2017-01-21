@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 import { pressStyle, typography, grid } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
 
-export class Login extends Component {
+export default class Login extends Component {
     constructor() {
         super()
         this.loginWithFacebook = this.loginWithFacebook.bind(this)
@@ -16,13 +16,12 @@ export class Login extends Component {
 
     loginWithFacebook() {
         const {goToPartiesList} = this
-
-        try{
-            database.loginWithFacebook(()=>goToPartiesList())
-        }catch(e){
-            alert(e)
-        }
-
+        
+        database
+            .loginWithFacebook()
+            .then(goToPartiesList)
+            // .catch(err => alert(err))
+       
     }
 
     render() {
