@@ -20,7 +20,7 @@ export default class Login extends Component {
         database
             .loginWithFacebook()
             .then(goToPartiesList)
-            // .catch(err => alert(err))
+            .catch(err => alert(err))
        
     }
 

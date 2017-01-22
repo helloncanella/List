@@ -28,7 +28,7 @@ fontsize=10
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1518</x>
+      <x>1529</x>
       <y>22</y>
       <w>286</w>
       <h>209</h>
@@ -52,7 +52,7 @@ fontsize=10
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1012</x>
+      <x>1023</x>
       <y>0</y>
       <w>264</w>
       <h>231</h>
@@ -70,13 +70,16 @@ fontsize=10
 --
 *Responsibilities*
 -- Initiate the app
+-- Connect Database
+-- When dabase connected 
+
   </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>539</x>
+      <x>550</x>
       <y>11</y>
       <w>385</w>
       <h>253</h>
@@ -103,7 +106,7 @@ fontsize=10
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>913</x>
+      <x>924</x>
       <y>99</y>
       <w>121</w>
       <h>33</h>
@@ -114,7 +117,7 @@ fontsize=10
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1265</x>
+      <x>1276</x>
       <y>88</y>
       <w>275</w>
       <h>44</h>
@@ -127,7 +130,7 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>847</x>
+      <x>858</x>
       <y>253</y>
       <w>121</w>
       <h>176</h>
@@ -138,7 +141,7 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
+      <x>781</x>
       <y>407</y>
       <w>396</w>
       <h>187</h>
@@ -164,7 +167,7 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1276</x>
+      <x>1287</x>
       <y>440</y>
       <w>110</w>
       <h>33</h>
@@ -175,7 +178,7 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1155</x>
+      <x>1166</x>
       <y>429</y>
       <w>143</w>
       <h>44</h>
@@ -188,9 +191,9 @@ saveUserData &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1254</x>
+      <x>1265</x>
       <y>539</y>
-      <w>231</w>
+      <w>264</w>
       <h>297</h>
     </coordinates>
     <panel_attributes>Database
@@ -220,7 +223,7 @@ saveUserData &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1155</x>
+      <x>1166</x>
       <y>539</y>
       <w>121</w>
       <h>44</h>
@@ -231,20 +234,9 @@ fetches user &gt;</panel_attributes>
     <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>396</x>
-      <y>253</y>
-      <w>187</w>
-      <h>198</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;160.0;150.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>220</x>
+      <x>231</x>
       <y>429</y>
       <w>396</w>
       <h>220</h>
@@ -270,7 +262,7 @@ fetches user &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
+      <x>704</x>
       <y>253</y>
       <w>33</w>
       <h>495</h>
@@ -281,7 +273,7 @@ fetches user &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>517</x>
+      <x>528</x>
       <y>726</y>
       <w>396</w>
       <h>275</h>
@@ -312,7 +304,7 @@ fetches user &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>902</x>
+      <x>913</x>
       <y>770</y>
       <w>143</w>
       <h>44</h>
@@ -325,7 +317,7 @@ getUserData &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1023</x>
+      <x>1034</x>
       <y>781</y>
       <w>110</w>
       <h>33</h>
@@ -336,7 +328,7 @@ getUserData &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>902</x>
+      <x>913</x>
       <y>869</y>
       <w>143</w>
       <h>44</h>
@@ -349,7 +341,7 @@ getPartyData &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1023</x>
+      <x>1034</x>
       <y>880</y>
       <w>110</w>
       <h>33</h>
@@ -361,7 +353,7 @@ getPartyData &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>99</x>
+      <x>110</x>
       <y>484</y>
       <w>143</w>
       <h>44</h>
@@ -374,7 +366,7 @@ m2=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>11</x>
       <y>484</y>
       <w>110</w>
       <h>33</h>
@@ -382,5 +374,52 @@ m2=1
     <panel_attributes>Database
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>319</x>
+      <y>638</y>
+      <w>121</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=1..n
+getPartyData &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>55</x>
+      <y>770</y>
+      <w>396</w>
+      <h>121</h>
+    </coordinates>
+    <panel_attributes>**Party**
+--
+/Interface/
+--
+- date: Date
+- address: string
+- photoUrl: string
+- usersId: []string
+- promotersId: []string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>880</y>
+      <w>55</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..n
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
 </diagram>

@@ -52,6 +52,8 @@ const registerHandler = () => {
     if (existingUser) {
       userId = existingUser._id;
 
+      console.log('lero lero')
+
       // Update our data to be in line with the latest from Facebook
       const prefixedData = {};
       _.each(fields, (val, key) => {
