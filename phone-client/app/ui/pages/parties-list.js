@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, Image, Dimensions } from 'react-native'
 import { typography, pressStyle } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
+import { MeteorListView } from 'react-native-meteor'
 
+export class PartiesList extends Component {
 
-export default class PartiesList extends Component {
-
-    constructor() {
+    constructor(props) {
         super()
-        this.logout = this.logout.bind(this)
     }
 
     logout() {
@@ -16,48 +15,47 @@ export default class PartiesList extends Component {
         this.props.navigator.push({ name: 'login' })
     }
 
-    render() {
-        const {container, text} = styles
-        console.log(this.props.loadingParties, this.props.parties)
+    renderParty(party) {
+        const {partyStyle, image, container} = styles
+            , {photosUrl, name, address, date, hour, canvas} = party
 
         return (
-            <View style={container}>
-                <Text style={text}>Parties</Text>
-                <TouchableHighlight onPress={this.logout} {...pressStyle} >
-                    <Text style={text}>Logout</Text>
-                </TouchableHighlight>
+            <View style={[partyStyle, container]}>
+                <Image style={image} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+            </View>
+        )
+    }
+
+    render() {
+        const {container, text, background} = styles
+            , { loadingParties } = this.props;
+
+        return (
+            <View style={[container, background]}>
+                <MeteorListView
+                    collection="parties"
+                    renderRow={this.renderParty}
+                    enableEmptySections={true}
+                    />
             </View>
         );
     }
 
-    // constructor() {
-    //     super();
-    //     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    //     this.state = {
-    //         dataSource: ds.cloneWithRows(['row 1', 'row 2']),
-    //     };
-    // }
 
-    // render() {
-    //     return (
-    //         <ListView
-    //             dataSource={this.state.dataSource}
-    //             renderRow={(rowData) => <Text>{rowData}</Text>}
-    //             />
-    //     );
-    // }
+
+
 }
 
-// const {createContainer} = database
-// export default createContainer(() => {
-//     const subscription = database.subscribe('parties')
+const {createContainer} = database
+export default createContainer(() => {
+    const subscription = database.subscribe('parties')
 
-//     return {
-//         loadingParties: !subscription.ready(),
-//         parties: database.collection('parties').find()
-//     }
+    return {
+        loadingParties: !subscription.ready(),
+        // parties: database.collection('parties').find()
+    }
 
-// }, PartiesList)
+}, PartiesList)
 
 
 const styles = StyleSheet.create({
@@ -65,11 +63,34 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    background: {
         backgroundColor: 'white'
+    },
+    partyStyle: {
+        alignSelf: 'stretch',
+        flex: 1,
     },
     text: {
         fontSize: typography.big
-    }
+    },
+    height: {},
+    image: {
+        flex: 1,
+        alignSelf: 'stretch',
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").width*3/4
+    },
+    positionRelative:{
+        position: 'relative'
+    },   
+    canvas: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+    },
 
 });
 

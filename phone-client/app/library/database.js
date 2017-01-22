@@ -9,12 +9,11 @@ class Database {
 
     constructor() {
         this.meteorLogin = this.meteorLogin.bind(this)
-        // this.createContainer = createContainer
-        // this.subscribe = Meteor.subscribe
-        // this.call = Meteor.call
-        // this.collection = Meteor.collection
-        console.log(Meteor)
-}
+        this.createContainer = createContainer
+        this.subscribe = Meteor.subscribe
+        this.call = Meteor.call
+        this.collection = Meteor.collection
+    }
 
     connect() {
         Meteor.connect('ws://192.168.1.4:3000/websocket');
@@ -47,7 +46,7 @@ class Database {
         LoginManager.logOut()
     }
 
-    storeLoginData(token, userId) {       
+    storeLoginData(token, userId) {
         const Data = Meteor.getData()
         AsyncStorage.setItem("loginToken", token);
         Data._tokenIdSaved = token;
@@ -57,17 +56,15 @@ class Database {
 
     meteorLogin(data) {
         const self = this
-    
+
         return new Promise((resolve, reject) => {
-            console.log(data)
             if (!data) resolve()
-            else{
+            else {
                 const onEnd = (err, result) => {
                     if (err) reject(err)
                     self.storeLoginData(result.token, result.id)
                     resolve()
                 }
-
                 Meteor.call('login', { facebook: data }, onEnd);
             }
 
