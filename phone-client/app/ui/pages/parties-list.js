@@ -4,10 +4,16 @@ import { typography, pressStyle } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
 import { MeteorListView } from 'react-native-meteor'
 
+var Orientation = require('react-native-orientation');
+
 export class PartiesList extends Component {
 
     constructor(props) {
         super()
+    }
+
+    componentDidMount(){
+        Orientation.addOrientationListener(()=>alert('HALLO'));
     }
 
     logout() {
