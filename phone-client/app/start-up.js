@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Navigation } from 'ui/components/navigation.js'
 import { database } from 'library/database.js'
+import SplashSreen from 'ui/pages/splash-screen.js'
 
 export class StartUp extends Component {
 	constructor(props) {
@@ -8,24 +9,23 @@ export class StartUp extends Component {
 
 		this.state = {
 			databaseConnected: false,
-			userIsLogged: false
+			userIsLogged: false,
+			connectionError: false,
 		}
 
 		this.onDatabaseConnected = this.onDatabaseConnected.bind(this)
-		this.printError = this.printError.bind(this)
+		this.onConnectionError = this.onConnectionError.bind(this)
 	}
 
 	componentDidMount() {
 		this.connectDatabase()
 	}
 
-	printError(error) {
-		return alert(error)
+	onConnectionError() {		
+		this.setState({connectionError: true}) 
 	}
-
+	
 	onDatabaseConnected() {	
-		console.log(database.loggedUser())
-
 		this.setState({
 			databaseConnected: true,
 			userIsLogged: database.userIsLogged()
@@ -33,11 +33,12 @@ export class StartUp extends Component {
 	}
 
 	connectDatabase() {
-		const {onDatabaseConnected, printError} = this
-		database.connect().then(onDatabaseConnected).catch(printError)
+		const {onDatabaseConnected, onConnectionError} = this
+		database.connect().then(onDatabaseConnected).catch(onConnectionError)
 	}
 
 	render() {
-		return this.state.databaseConnected ? <Navigation userIsLogged={this.state.userIsLogged} /> : null
+		//TODO: Insert error page.
+		return this.state.databaseConnected ? <Navigation userIsLogged={this.state.userIsLogged} /> : <SplashSreen />
 	}
 }

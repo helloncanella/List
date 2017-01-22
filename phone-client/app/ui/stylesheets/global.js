@@ -1,5 +1,5 @@
 export const color = {
-    primary: '#1A237E',
+    primary: '#D81B60',
     secondary: '#424242',
     borderLine: '#EEEEEE',
     silentText: '#757575'
@@ -7,8 +7,8 @@ export const color = {
 
 export const typography = {
     small: 13,
-    normal: 17,
-    big: 25,
+    normal: 18,
+    big: 30,
     huge: 70, 
     extremlyHuge: 150
 }
