@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Navigation } from 'ui/components/navigation.js'
 import { database } from 'library/database.js'
 import SplashSreen from 'ui/pages/splash-screen.js'
+import Orientation from 'react-native-orientation'
 
 export class StartUp extends Component {
 	constructor(props) {
@@ -18,7 +19,12 @@ export class StartUp extends Component {
 	}
 
 	componentDidMount() {
+		this.fixPhoneOrientation()
 		this.connectDatabase()
+	}
+
+	fixPhoneOrientation(){
+		Orientation.lockToPortrait()
 	}
 
 	onConnectionError() {		
