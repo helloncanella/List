@@ -1,16 +1,23 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import { database } from 'library/database.js'
 import Dowloading from 'ui/components/downloading.js'
+import {imageDimensions, grid, typography, color} from 'ui/stylesheets/global.js'
 
 class PartyDetails extends Component {
     party() {
-        const {container} = styles
+        const {partyName, partyDay, container, titles} = styles
+            , {photosUrl, name, address, date, hour, canvas, _id: id} = this.props.party
+
         return (
             <View style={container}>
-                <Text>{this.props.party.name}</Text>
+                <Image style={imageDimensions()} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+                <View style={grid}>
+                    <Text style={[partyName, titles]}>{name}</Text>
+                    <Text style={[partyDay, titles]}>{date} - {hour}</Text>
+                </View>
             </View>
-        );
+        )
     }
 
     render() {
@@ -23,7 +30,18 @@ class PartyDetails extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        position: 'relative',
         backgroundColor: 'white'
+    },
+    titles: {
+        textAlign: 'center'
+    },
+    partyName: {
+        fontSize: typography.big,
+        color: color.primary,
+    },
+    partyDay: {
+        fontSize: typography.normal
     }
 });
 

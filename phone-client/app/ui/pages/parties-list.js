@@ -1,52 +1,25 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, Image, Dimensions } from 'react-native'
-import { typography, pressStyle, grid, color } from 'ui/stylesheets/global.js'
+import { StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native'
+import { typography, pressStyle, grid, color, imageDimensions } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
 import { MeteorListView } from 'react-native-meteor'
 
-var Orientation = require('react-native-orientation');
 
 export class PartiesList extends Component {
 
     constructor(props) {
         super()
-        this.state = {
-            photoWidth: 0,
-            photoHeight: 0
-        }
         this.renderParty = this.renderParty.bind(this)
-        this.setPhotoDimension = this.setPhotoDimension.bind(this)
-    }
-
-    componentDidMount() {
-        this.setPhotoDimension()
-        this.resizePhotsOnPhoneReorientation()
     }
 
     goToParty(id) {
         this.props.navigator.push({ name: 'party', id })
     }
 
-
-    setPhotoDimension() {
-        const {width} = Dimensions.get("window")
-            , aspectRatio = 4 / 3
-
-
-        this.setState({ photoWidth: width, photoHeight: width / aspectRatio })
-    }
-
-    getPhotoDimensions() {
-        const {photoWidth: width, photoHeight: height} = this.state
-        return { width, height }
-    }
-
-    resizePhotsOnPhoneReorientation() {
-        Orientation.addOrientationListener(this.setPhotoDimension)
-    }
+    
 
     logout() {
-        //TODO: Remove to especialized component
+        //TODO: Move to an especialized component
         const logoutStyle = {           
             color: 'white',
             fontSize: 20,
@@ -76,16 +49,16 @@ export class PartiesList extends Component {
     renderParty(party) {
         const {image, text, partyContainer, partyName, partyDay} = styles
             , {photosUrl, name, address, date, hour, canvas, _id: id} = party
-            , dimmensions = this.getPhotoDimensions()
             , goToParty = this.goToParty.bind(this, id)
+
 
         return (
             <TouchableHighlight onPress={goToParty} {...pressStyle}>
                 <View style={partyContainer}>
-                    <Image style={dimmensions} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+                    <Image style={imageDimensions()} source={{ uri: photosUrl[0] }} resizeMode="cover" />
                     <View style={grid}>
                         <Text style={partyName}>{name}</Text>
-                        <Text style={partyDay}>{date}- {hour}</Text>
+                        <Text style={partyDay}>{date} - {hour}</Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -100,7 +73,6 @@ export class PartiesList extends Component {
         return (
             <View style={[container, background]}>
                 <MeteorListView
-                    key={this.state.photoWidth}
                     collection="parties"
                     renderRow={this.renderParty}
                     enableEmptySections={true}
@@ -130,8 +102,6 @@ export default createContainer(() => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         position: 'relative'
     },
     partyContainer: {

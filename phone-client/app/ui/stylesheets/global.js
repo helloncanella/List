@@ -1,3 +1,5 @@
+import {Dimensions} from 'react-native'
+
 export const color = {
     primary: '#D81B60',
     secondary: '#424242',
@@ -20,4 +22,14 @@ export const grid = {
 export const pressStyle = {
     underlayColor: "transparent",
     activeOpacity: 0.7
+}
+
+export function imageDimensions (aspectRatio=4/3) {
+    const windowWidth = Dimensions.get("window").width
+    
+    return {
+        width: windowWidth,
+        height: windowWidth/aspectRatio
+    }
+    
 }
