@@ -57,4 +57,6 @@ const styles = StyleSheet.create({
 });
 
 
-Login.propTypes = {}
+Login.propTypes = {
+    navigator: PropTypes.object.isRequired
+}

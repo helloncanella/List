@@ -23,6 +23,11 @@ export class PartiesList extends Component {
         this.resizePhotsOnPhoneReorientation()
     }
 
+    goToParty(id){
+        this.props.navigator.push({name:'party', id})
+    }
+
+
     setPhotoDimension() {
         const {width} = Dimensions.get("window")
             , aspectRatio = 4 / 3            
@@ -45,17 +50,20 @@ export class PartiesList extends Component {
 
     renderParty(party) {
         const {image, text, partyContainer, partyName, partyDay} = styles
-            , {photosUrl, name, address, date, hour, canvas} = party
+            , {photosUrl, name, address, date, hour, canvas, _id:id} = party
             , dimmensions = this.getPhotoDimensions()
+            , goToParty = this.goToParty.bind(this, id)
 
         return (
-            <View style={partyContainer}>
-                <Image style={dimmensions} source={{ uri: photosUrl[0] }} resizeMode="cover" />
-                <View style={grid}>
-                    <Text style={partyName}>{name}</Text>
-                    <Text style={partyDay}>{date} - {hour}</Text>
+            <TouchableHighlight onPress={goToParty} {...pressStyle}>  
+                <View style={partyContainer}>
+                    <Image style={dimmensions} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+                    <View style={grid}>
+                        <Text style={partyName}>{name}</Text>
+                        <Text style={partyDay}>{date} - {hour}</Text>
+                    </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         )
     }
 
@@ -116,4 +124,6 @@ const styles = StyleSheet.create({
 });
 
 
-PartiesList.propTypes = {}
+PartiesList.propTypes = {
+    navigator: PropTypes.object.isRequired
+}
