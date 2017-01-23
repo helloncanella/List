@@ -4,6 +4,8 @@ import { database } from 'library/database.js'
 import Dowloading from 'ui/components/downloading.js'
 import { imageDimensions, grid, typography, color, pressStyle } from 'ui/stylesheets/global.js'
 import BackButton from 'ui/components/back-button.js'
+import Meteor from 'react-native-meteor' //TODO: remove it!
+
 
 class PartyDetails extends Component {
 
@@ -43,7 +45,7 @@ class PartyDetails extends Component {
                 <Image style={imageDimensions()} source={{ uri: photosUrl[0] }} resizeMode="cover" />
                 <View style={grid}>
                     <Text style={[partyName, titles]}>{name}</Text>
-                    <Text style={[partyDay, titles]}>{date}- {hour}</Text>
+                    <Text style={[partyDay, titles]}>{date} - {hour}</Text>
                 </View>
                 <ListMeButton />
             </View>
@@ -101,7 +103,7 @@ export default database.createContainer(props => {
         navigator,
         party: database.collection('parties').findOne({ _id: partyId }),
         userIsListed: userParties.indexOf(partyId) > -1 ? true : false,
-        toggleUserPresence: () => database.call('toggleUserPresence', partyId)
+        toggleUserPresence: () => Meteor.call('party.toggleUserPresence', partyId)
     }
 
 

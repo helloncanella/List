@@ -7,15 +7,15 @@ Meteor.methods({
     'party.toggleUserPresence'(partytId) {
         throwErrorIfUserIsntLogged()
 
-        let {parties} = Meteor.user()
-            , index = parties.indexOf(partytId)
+        let {parties} = Meteor.users.findOne({_id:Meteor.userId()})
+            , index = parties.indexOf(partytId)           
 
         parties = [].concat(parties)
 
-        if (index === -1) parties.push(partId)
+        if (index === -1) parties.push(partytId)
         else parties.splice(index, 1)
 
-        updateUser(parties)
+        updateUser({parties})
     },
 
 })
