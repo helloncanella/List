@@ -7,4 +7,8 @@ Meteor.publish('parties', function() {
 
 Meteor.publish('party', function(id) {
   return Parties.find({_id:id});
+});
+
+Meteor.publish('loggedUser', function() {
+  return Meteor.users.find({_id: this.userId})
 });  

@@ -52,7 +52,7 @@ const registerHandler = () => {
     if (existingUser) {
       userId = existingUser._id;
 
-      console.log('lero lero')
+      console.log('logged user')
 
       // Update our data to be in line with the latest from Facebook
       const prefixedData = {};
@@ -72,6 +72,7 @@ const registerHandler = () => {
           facebook: fields
         },
         profile: { name: identity.name },
+        parties: [],
         emails: [{
           address: identity.email,
           verified: true
