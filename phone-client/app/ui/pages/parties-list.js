@@ -11,8 +11,8 @@ export class PartiesList extends Component {
     constructor(props) {
         super()
         this.state = {
-            photoWidth: '',
-            photoHeight: ''
+            photoWidth: 0,
+            photoHeight: 0
         }
         this.renderParty = this.renderParty.bind(this)
         this.setPhotoDimension = this.setPhotoDimension.bind(this)
@@ -31,6 +31,8 @@ export class PartiesList extends Component {
     setPhotoDimension() {
         const {width} = Dimensions.get("window")
             , aspectRatio = 4 / 3
+
+
         this.setState({ photoWidth: width, photoHeight: width / aspectRatio })
     }
 
@@ -45,19 +47,28 @@ export class PartiesList extends Component {
 
     logout() {
         //TODO: Remove to especialized component
-        const logoutStyle = {
+        const logoutStyle = {           
+            color: 'white',
+            fontSize: 20,
+        }
+
+        const touchContainer = {
+            // zIndex: 1,
             position: 'absolute',
-            color: 'white'
+            backgroundColor: 'rgba(0,0,0,0)',
+            right: 15,
+            top: 15
         }
 
         const {navigator} = this.props
             , onPress = () => {
-                database.logout()
                 navigator.push({ name: 'login' })
+                database.logout()
             }
 
         return (
-            <TouchableHighlight {...pressStyle}>
+            <TouchableHighlight {...pressStyle} onPress={onPress} style={touchContainer}>
+                <Text style={logoutStyle}>sign out</Text>
             </TouchableHighlight>
         )
     }
@@ -83,7 +94,8 @@ export class PartiesList extends Component {
 
     render() {
         const {container, text, background} = styles
-            , { loadingParties } = this.props;
+            , { loadingParties } = this.props
+            , Logout = () => this.logout()
 
         return (
             <View style={[container, background]}>
@@ -93,6 +105,7 @@ export class PartiesList extends Component {
                     renderRow={this.renderParty}
                     enableEmptySections={true}
                     />
+                <Logout />
             </View>
         );
     }
@@ -122,7 +135,7 @@ const styles = StyleSheet.create({
         position: 'relative'
     },
     partyContainer: {
-        marginBottom: 15
+        marginBottom: 15,
     },
     background: {
         backgroundColor: 'white'

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
-import { pressStyle, typography, grid } from 'ui/stylesheets/global.js'
+import { pressStyle, typography, grid, color } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
 
 export default class Login extends Component {
@@ -44,10 +44,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white'
+        backgroundColor: color.primary
     },
     title: {
         fontSize: typography.huge,
+        color: 'white',
         marginBottom: 40,
     },
     image: {
