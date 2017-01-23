@@ -23,20 +23,20 @@ export class PartiesList extends Component {
         this.resizePhotsOnPhoneReorientation()
     }
 
-    goToParty(id){
-        this.props.navigator.push({name:'party', id})
+    goToParty(id) {
+        this.props.navigator.push({ name: 'party', id })
     }
 
 
     setPhotoDimension() {
         const {width} = Dimensions.get("window")
-            , aspectRatio = 4 / 3            
+            , aspectRatio = 4 / 3
         this.setState({ photoWidth: width, photoHeight: width / aspectRatio })
     }
 
-    getPhotoDimensions(){
+    getPhotoDimensions() {
         const {photoWidth: width, photoHeight: height} = this.state
-        return {width, height}
+        return { width, height }
     }
 
     resizePhotsOnPhoneReorientation() {
@@ -44,23 +44,37 @@ export class PartiesList extends Component {
     }
 
     logout() {
-        database.logout()
-        this.props.navigator.push({ name: 'login' })
+        //TODO: Remove to especialized component
+        const logoutStyle = {
+            position: 'absolute',
+            color: 'white'
+        }
+
+        const {navigator} = this.props
+            , onPress = () => {
+                database.logout()
+                navigator.push({ name: 'login' })
+            }
+
+        return (
+            <TouchableHighlight {...pressStyle}>
+            </TouchableHighlight>
+        )
     }
 
     renderParty(party) {
         const {image, text, partyContainer, partyName, partyDay} = styles
-            , {photosUrl, name, address, date, hour, canvas, _id:id} = party
+            , {photosUrl, name, address, date, hour, canvas, _id: id} = party
             , dimmensions = this.getPhotoDimensions()
             , goToParty = this.goToParty.bind(this, id)
 
         return (
-            <TouchableHighlight onPress={goToParty} {...pressStyle}>  
+            <TouchableHighlight onPress={goToParty} {...pressStyle}>
                 <View style={partyContainer}>
                     <Image style={dimmensions} source={{ uri: photosUrl[0] }} resizeMode="cover" />
                     <View style={grid}>
                         <Text style={partyName}>{name}</Text>
-                        <Text style={partyDay}>{date} - {hour}</Text>
+                        <Text style={partyDay}>{date}- {hour}</Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -70,14 +84,14 @@ export class PartiesList extends Component {
     render() {
         const {container, text, background} = styles
             , { loadingParties } = this.props;
-          
+
         return (
             <View style={[container, background]}>
                 <MeteorListView
                     key={this.state.photoWidth}
                     collection="parties"
                     renderRow={this.renderParty}
-                    enableEmptySections={true}                    
+                    enableEmptySections={true}
                     />
             </View>
         );
@@ -105,19 +119,20 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        position: 'relative'
     },
-    partyContainer:{
+    partyContainer: {
         marginBottom: 15
     },
     background: {
         backgroundColor: 'white'
     },
-  
+
     partyName: {
         fontSize: typography.big,
         color: color.primary
     },
-    partyDay:{
+    partyDay: {
         fontSize: typography.normal
     }
 
