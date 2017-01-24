@@ -151,13 +151,14 @@ export default database.createContainer(props => {
     const partySubscription = database.subscribe('party')
 
     const {navigator, id: partyId} = props
-        , {parties: userParties} = database.loggedUser()
+        , party = database.collection('parties').findOne({ _id: partyId })
+        , {usersRequesting: users} = party
+        , userId = database.loggedUser()._id
 
     return {
         loadingParty: !partySubscription.ready(),
-        navigator,
-        party: database.collection('parties').findOne({ _id: partyId }),
-        userIsListed: userParties.indexOf(partyId) > -1 ? true : false,
+        navigator, party,        
+        userIsListed: users.indexOf(userId) > -1 ? true : false,
         toggleUserPresence: () => database.call('party.toggleUserPresence', partyId)
     }
 

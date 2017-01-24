@@ -6,3 +6,7 @@ export const updateUser = (dataUpdate) => {
     Meteor.users.update({ _id: Meteor.userId() }, { $set: dataUpdate })
 }
 
+
+export const updateParty = (dataUpdate, partyId) => {
+    Meteor.collection('parties').update({ _id: partyId }, { $set: dataUpdate })
+}

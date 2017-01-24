@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { throwErrorIfUserIsntLogged, updateUser } from '/server/imports/helpers.js'
+import { throwErrorIfUserIsntLogged, updateParty } from '/server/imports/helpers.js'
 
 Meteor.methods({
 
@@ -7,15 +7,17 @@ Meteor.methods({
     'party.toggleUserPresence'(partytId) {
         throwErrorIfUserIsntLogged()
 
-        let {parties} = Meteor.users.findOne({_id:Meteor.userId()})
-            , index = parties.indexOf(partytId)           
+        let {usersRequesting = []} = Meteor.collection("parties").findOne({_id:partytId})
+            , userId = Meteor.userId()
+            , index = usersRequesting.indexOf(userId)           
 
-        parties = [].concat(parties)
+        //usersRequesting is equal to number of users requesting presence in the party.    
+        usersRequesting = [].concat(usersRequesting)
 
-        if (index === -1) parties.push(partytId)
-        else parties.splice(index, 1)
+        if (index === -1) usersRequesting.push(userId)
+        else usersRequesting.splice(index, 1)
 
-        updateUser({parties})
+        updateParty({usersRequesting}, partyId)
     },
 
 })

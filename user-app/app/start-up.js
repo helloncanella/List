@@ -3,6 +3,7 @@ import { Navigation } from 'ui/components/navigation.js'
 import { database } from 'library/database.js'
 import SplashSreen from 'ui/pages/splash-screen.js'
 import Orientation from 'react-native-orientation'
+import NetworkError from 'ui/pages/network-error.js'
 
 export class StartUp extends Component {
 	constructor(props) {
@@ -45,6 +46,9 @@ export class StartUp extends Component {
 
 	render() {
 		//TODO: Insert error page.
-		return this.state.databaseConnected ? <Navigation userIsLogged={this.state.userIsLogged} /> : <SplashSreen />
+		const componentConnectedDatabase = this.state.databaseConnected ? <Navigation userIsLogged={this.state.userIsLogged} /> : <SplashSreen />
+			, componentOfConnectionError = <NetworkError />
+
+		return this.state.connectionError ? componentOfConnectionError : componentConnectedDatabase
 	}
 }
