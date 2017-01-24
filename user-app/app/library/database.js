@@ -72,9 +72,14 @@ class Database {
             if (!data) resolve()
             else {
                 const onEnd = (err, result) => {
-                    if (err) reject(err)
-                    self.storeLoginData(result.token, result.id)
-                    resolve()
+                    if (err) {
+                        /*console.err(err);*/ 
+                        reject(err)
+                    }
+                    else{
+                        self.storeLoginData(result.token, result.id)
+                        resolve()
+                    }
                 }
                 Meteor.call('login', { facebook: data }, onEnd);
             }

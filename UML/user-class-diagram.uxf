@@ -28,7 +28,7 @@ fontsize=10
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1529</x>
+      <x>1595</x>
       <y>22</y>
       <w>286</w>
       <h>209</h>
@@ -52,26 +52,30 @@ fontsize=10
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1023</x>
+      <x>1089</x>
       <y>0</y>
       <w>264</w>
-      <h>231</h>
+      <h>253</h>
     </coordinates>
     <panel_attributes>**StartUp**
 --
 /UI Component/
 --
 - navigation: Navigation
-- fileSystem: fileSystem
 - userIsLogged: boolean
+- database: Database
 --
 + render: Component
 - compomentDidMount: void
+- connectDatabase
+- onConnectedDatabase
+- fixPhoneOrientation
+- onConnectionError
 --
 *Responsibilities*
--- Initiate the app
 -- Connect Database
--- When dabase connected 
+-- When dabase connected, render navigation
+-- Fix phone orientation
 
   </panel_attributes>
     <additional_attributes/>
@@ -79,7 +83,7 @@ fontsize=10
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>550</x>
+      <x>616</x>
       <y>11</y>
       <w>385</w>
       <h>253</h>
@@ -91,6 +95,7 @@ fontsize=10
 - routes: [] Route
 - initialRoute: Route
 - userData: string
+
 --
 - renderScene: void
 - getInitialRoute : void
@@ -100,13 +105,14 @@ fontsize=10
 + Do initial route.
 + Route app
 
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>924</x>
+      <x>990</x>
       <y>99</y>
       <w>121</w>
       <h>33</h>
@@ -117,7 +123,7 @@ fontsize=10
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1276</x>
+      <x>1342</x>
       <y>88</y>
       <w>275</w>
       <h>44</h>
@@ -130,7 +136,7 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>858</x>
+      <x>924</x>
       <y>253</y>
       <w>121</w>
       <h>176</h>
@@ -141,7 +147,7 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>781</x>
+      <x>847</x>
       <y>407</y>
       <w>396</w>
       <h>187</h>
@@ -167,7 +173,7 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1287</x>
+      <x>1353</x>
       <y>440</y>
       <w>110</w>
       <h>33</h>
@@ -178,7 +184,7 @@ verify if an user is logged &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1166</x>
+      <x>1232</x>
       <y>429</y>
       <w>143</w>
       <h>44</h>
@@ -191,7 +197,7 @@ saveUserData &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1265</x>
+      <x>1331</x>
       <y>539</y>
       <w>264</w>
       <h>297</h>
@@ -223,7 +229,7 @@ saveUserData &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1166</x>
+      <x>1232</x>
       <y>539</y>
       <w>121</w>
       <h>44</h>
@@ -236,7 +242,7 @@ fetches user &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>231</x>
+      <x>297</x>
       <y>429</y>
       <w>396</w>
       <h>220</h>
@@ -262,7 +268,7 @@ fetches user &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>704</x>
+      <x>770</x>
       <y>253</y>
       <w>33</w>
       <h>495</h>
@@ -273,7 +279,7 @@ fetches user &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>528</x>
+      <x>594</x>
       <y>726</y>
       <w>396</w>
       <h>275</h>
@@ -304,7 +310,7 @@ fetches user &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>913</x>
+      <x>979</x>
       <y>770</y>
       <w>143</w>
       <h>44</h>
@@ -317,7 +323,7 @@ getUserData &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1034</x>
+      <x>1100</x>
       <y>781</y>
       <w>110</w>
       <h>33</h>
@@ -328,7 +334,7 @@ getUserData &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>913</x>
+      <x>979</x>
       <y>869</y>
       <w>143</w>
       <h>44</h>
@@ -341,7 +347,7 @@ getPartyData &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1034</x>
+      <x>1100</x>
       <y>880</y>
       <w>110</w>
       <h>33</h>
@@ -353,7 +359,7 @@ getPartyData &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>110</x>
+      <x>176</x>
       <y>484</y>
       <w>143</w>
       <h>44</h>
@@ -366,7 +372,7 @@ m2=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>11</x>
+      <x>77</x>
       <y>484</y>
       <w>110</w>
       <h>33</h>
@@ -378,7 +384,7 @@ m2=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>319</x>
+      <x>385</x>
       <y>638</y>
       <w>121</w>
       <h>154</h>
@@ -391,10 +397,10 @@ getPartyData &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>55</x>
+      <x>121</x>
       <y>770</y>
       <w>396</w>
-      <h>121</h>
+      <h>165</h>
     </coordinates>
     <panel_attributes>**Party**
 --
@@ -403,23 +409,35 @@ getPartyData &gt;</panel_attributes>
 - date: Date
 - address: string
 - photoUrl: string
-- usersId: []string
 - promotersId: []string
-</panel_attributes>
+- usersRequests: []string
+- acceptedUsers: []string
+- refusedUsers: []string </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>198</x>
-      <y>880</y>
+      <x>264</x>
+      <y>924</y>
       <w>55</w>
-      <h>110</h>
+      <h>132</h>
     </coordinates>
     <panel_attributes>lt=-
-m1=0..n
 m2=0..n
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>1034</y>
+      <w>110</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>Users
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
