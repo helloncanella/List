@@ -1,13 +1,14 @@
 import { Meteor } from 'meteor/meteor'
-import { throwErrorIfUserIsntLogged, updateParty } from '/server/imports/helpers.js'
+import { throwErrorIfUserIsntLogged, updateParty} from '/server/imports/helpers.js'
+import Parties from '/collections/parties.js'
 
 Meteor.methods({
 
      //if the user is present, remove him from list, if not, add him
-    'party.toggleUserPresence'(partytId) {
+    'party.toggleUserPresence'(partyId) {
         throwErrorIfUserIsntLogged()
 
-        let {usersRequesting = []} = Meteor.collection("parties").findOne({_id:partytId})
+        let {usersRequesting = []} = Parties.findOne({_id:partyId})
             , userId = Meteor.userId()
             , index = usersRequesting.indexOf(userId)           
 
@@ -17,9 +18,7 @@ Meteor.methods({
         if (index === -1) usersRequesting.push(userId)
         else usersRequesting.splice(index, 1)
 
-        updateParty({usersRequesting}, partyId)
+        updateParty(partyId, {usersRequesting})
     },
 
 })
-
-

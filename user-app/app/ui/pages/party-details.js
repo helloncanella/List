@@ -17,7 +17,7 @@ class PartyDetails extends Component {
         return (
             <View style={[grid, header]}>
                 <Text style={[partyName, titles]}>{name}</Text>
-                <Text style={[partyDay, titles]}>{date}- {hour}</Text>
+                <Text style={[partyDay, titles]}>{date} - {hour}</Text>
                 <ListMeButton />
             </View>
         )
@@ -152,7 +152,7 @@ export default database.createContainer(props => {
 
     const {navigator, id: partyId} = props
         , party = database.collection('parties').findOne({ _id: partyId })
-        , {usersRequesting: users} = party
+        , {usersRequesting:users = [] } = party
         , userId = database.loggedUser()._id
 
     return {

@@ -1,3 +1,5 @@
+import Parties from '/collections/parties.js'
+
 export const throwErrorIfUserIsntLogged = () => {
     if (!Meteor.userId()) throw new Meteor.Error("User isn't logged")
 }
@@ -7,6 +9,6 @@ export const updateUser = (dataUpdate) => {
 }
 
 
-export const updateParty = (dataUpdate, partyId) => {
-    Meteor.collection('parties').update({ _id: partyId }, { $set: dataUpdate })
+export const updateParty = (partyId, dataUpdate) => {
+    Parties.update({ _id: partyId }, { $set: dataUpdate })
 }

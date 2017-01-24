@@ -6,7 +6,7 @@ const partiesList = [
 		date: "27 de abril",
 		hour: "22h",
 		descriptionTopics: [
-			{
+			{ 
 				title: 'A Festa',
 				text: `Gente bonita, descontração e aquela roda de samba pra você mostrar que é bamba! Esse é o clima da NOSSA SEGUNDA na Pink Elephant Rio!
 
