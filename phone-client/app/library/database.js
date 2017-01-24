@@ -27,7 +27,7 @@ class Database {
                 onConnected = () => { this.resumeLogin().then(onLoginResumed).catch(onError) }
 
             Meteor.ddp.on('connected', onConnected)
-            setTimeout(() => { reject('Problemas de Conexão!') }, 300 * 60)
+            setTimeout(() => { reject('Problemas de Conexão!') }, 5000 * 60)
         })
 
     }

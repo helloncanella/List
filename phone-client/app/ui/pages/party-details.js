@@ -1,13 +1,77 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableHighlight, ScrollView } from 'react-native'
 import { database } from 'library/database.js'
 import Dowloading from 'ui/components/downloading.js'
 import { imageDimensions, grid, typography, color, pressStyle } from 'ui/stylesheets/global.js'
 import BackButton from 'ui/components/back-button.js'
-import Meteor from 'react-native-meteor' //TODO: remove it!
+
 
 
 class PartyDetails extends Component {
+
+    header() {
+        const {partyName, partyDay, titles, header} = styles
+            , {name, address, date, hour, _id: id} = this.props.party
+            , ListMeButton = () => this.listMeButton()
+
+        return (
+            <View style={[grid, header]}>
+                <Text style={[partyName, titles]}>{name}</Text>
+                <Text style={[partyDay, titles]}>{date}- {hour}</Text>
+                <ListMeButton />
+            </View>
+        )
+    }
+
+    listMeButton() {
+        const {userIsListed, toggleUserPresence} = this.props
+            , {listMeButton, highlightedButton, buttonTex} = styles
+
+        const additionalStyle = userIsListed ? highlightedButton : null
+            , text = userIsListed ? "Sair da lista" : "Entrar na lista"
+
+        return (
+            <TouchableHighlight {...pressStyle} style={[listMeButton, additionalStyle]} onPress={toggleUserPresence}>
+                <Text style={buttonTex}>{text}</Text>
+            </TouchableHighlight>
+        )
+    }
+
+    description() {
+        const {descriptionTopics} = this.props.party
+            , {topic: topicStyle, descriptionTitle, descriptionText} = styles
+
+        const topics = descriptionTopics.map(({ text, title }, index) => {
+            return (
+                <View style={topicStyle} key={index}>
+                    <Text style={descriptionTitle}>{title}</Text>
+                    <Text style={descriptionText}>{text}</Text>
+                </View>
+            )
+        })
+
+        return (
+            <View style={grid}>
+                {topics}
+            </View>
+        )
+
+    }
+
+    party() {
+
+        const {photosUrl} = this.props.party
+            , Header = () => this.header()
+            , Description = () => this.description()
+
+        return (
+            <ScrollView>
+                <Image style={imageDimensions()} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+                <Header />
+                <Description />
+            </ScrollView>
+        )
+    }
 
     component() {
         const {container, backButton} = styles
@@ -21,36 +85,6 @@ class PartyDetails extends Component {
         )
     }
 
-    listMeButton() {
-        const {userIsListed, toggleUserPresence} = this.props
-            , {listMeButton, highlightedButton} = styles
-
-        const additionalStyle = userIsListed ? highlightedButton : null
-            , text = userIsListed ? "Sair da lista" : "Entrar na lista"
-
-        return (
-            <TouchableHighlight {...pressStyle} style={[listMeButton, additionalStyle]} onPress={toggleUserPresence}>
-                <Text>{text}</Text>
-            </TouchableHighlight>
-        )
-    }
-
-    party() {
-        const {partyName, partyDay, titles} = styles
-            , {photosUrl, name, address, date, hour, canvas, _id: id} = this.props.party
-            , ListMeButton = () => this.listMeButton()
-
-        return (
-            <View>
-                <Image style={imageDimensions()} source={{ uri: photosUrl[0] }} resizeMode="cover" />
-                <View style={grid}>
-                    <Text style={[partyName, titles]}>{name}</Text>
-                    <Text style={[partyDay, titles]}>{date} - {hour}</Text>
-                </View>
-                <ListMeButton />
-            </View>
-        )
-    }
 
     render() {
         return this.props.loadingParty ? <Dowloading /> : this.component()
@@ -65,29 +99,50 @@ const styles = StyleSheet.create({
         position: 'relative',
         backgroundColor: 'white'
     },
+    header: {
+        alignItems: 'center',
+    },
     backButton: {
         top: 10,
         left: -0,
         position: 'absolute'
     },
     listMeButton: {
-        backgroundColor: color.secondary,
-        // color: 'white',
-        // textAlign: 'center',
+        backgroundColor: '#F06292',
         width: 150,
-        height: 40
+        paddingTop: 8,
+        paddingBottom: 8,
+        marginTop: 10,
+        borderRadius: 10
+    },
+    buttonTex: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 20
     },
     highlightedButton: {
         backgroundColor: color.primary
     },
+    topic: {
+        marginBottom: 10
+    },
     titles: {
-        textAlign: 'center'
+        textAlign: 'center',
     },
     partyName: {
         fontSize: typography.big,
         color: color.primary,
     },
     partyDay: {
+        fontSize: typography.normal
+    },
+    descriptionTitle: {
+        fontSize: 25,
+        marginBottom: 10,
+        // color: color.secondary,
+        fontWeight: 'bold'
+    },
+    descriptionText: {
         fontSize: typography.normal
     }
 });
@@ -103,7 +158,7 @@ export default database.createContainer(props => {
         navigator,
         party: database.collection('parties').findOne({ _id: partyId }),
         userIsListed: userParties.indexOf(partyId) > -1 ? true : false,
-        toggleUserPresence: () => Meteor.call('party.toggleUserPresence', partyId)
+        toggleUserPresence: () => database.call('party.toggleUserPresence', partyId)
     }
 
 
