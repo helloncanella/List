@@ -17,7 +17,7 @@ Meteor.methods({
 
         if (index === -1) usersRequesting.push(userId)
         else usersRequesting.splice(index, 1)
-
+ 
         updateParty(partyId, {usersRequesting})
     },
 
