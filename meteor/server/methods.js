@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { throwErrorIfUserIsntLogged, updateParty} from '/server/imports/helpers.js'
+import { throwErrorIfUserIsntLogged, updateParty, removeFromCollection, addIntoCollection} from '/server/imports/helpers.js'
 import Parties from '/collections/parties.js'
 
 Meteor.methods({
@@ -21,8 +21,23 @@ Meteor.methods({
         updateParty(partyId, {usersRequesting})
     },
 
-    'party.refuseUser'({partyId, userId}){ console.log('refuse user', {partyId, userId})},
+    'party.refuseUser'({partyId, userId}){ 
+        let {refusedUsers = [], acceptedUsers = []} = Parties.findOne({_id:partyId})
+        
+        acceptedUsers = removeFromCollection(userId, acceptedUsers)
+        refusedUsers = addIntoCollection(userId , refusedUsers)
 
-    'party.acceptUser'({partyId, userId}){ console.log('accept user', {partyId, userId}) },
+        updateParty(partyId, {acceptedUsers, refusedUsers})
+
+    },
+
+    'party.acceptUser'({partyId, userId}){
+        let {refusedUsers = [], acceptedUsers = []} = Parties.findOne({_id:partyId})
+
+        refusedUsers = removeFromCollection(userId , refusedUsers)
+        acceptedUsers = addIntoCollection(userId, acceptedUsers)
+
+        updateParty(partyId, {acceptedUsers, refusedUsers})
+     },
 
 })

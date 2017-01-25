@@ -31,7 +31,7 @@ class PartyDetails extends Component {
             , text = userIsListed ? "Sair da lista" : "Entrar na lista"
 
         return (
-            <TouchableHighlight {...pressStyle} style={[listMeButton, additionalStyle]} onPress={toggleUserPresence}>
+            <TouchableHighlight onPress={toggleUserPresence} style={[listMeButton, additionalStyle]}  underlayColor='transparent'>
                 <Text style={buttonTex}>{text}</Text>
             </TouchableHighlight>
         )
