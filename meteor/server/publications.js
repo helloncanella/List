@@ -1,6 +1,8 @@
 import Parties from '../collections/parties.js'
 import {Meteor} from 'meteor/meteor'
 
+const Users = Meteor.users
+
 Meteor.publish('parties', function() {
   return Parties.find();
 });
@@ -10,5 +12,9 @@ Meteor.publish('party', function(id) {
 });
 
 Meteor.publish('loggedUser', function() {
-  return Meteor.users.find({_id: this.userId})
+  return Users.find({_id: this.userId})
+});
+
+Meteor.publish('users.socialData', function() {
+  return Users.find({}, {'services':1}) //TODO: Include picture
 });  

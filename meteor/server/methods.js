@@ -21,4 +21,8 @@ Meteor.methods({
         updateParty(partyId, {usersRequesting})
     },
 
+    'party.refuseUser'({partyId, userId}){ console.log('refuse user', {partyId, userId})},
+
+    'party.acceptUser'({partyId, userId}){ console.log('accept user', {partyId, userId}) },
+
 })
