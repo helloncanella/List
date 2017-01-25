@@ -10,7 +10,6 @@ Meteor.connect('ws://192.168.1.4:3000/websocket');
 class StartUp extends Component {
 
     icon(action, userId) {
-
         let callback, iconName, color = 'black'
 
         if (action === 'accept') {
@@ -43,23 +42,30 @@ class StartUp extends Component {
         )
     }
 
-    renderUser(user) {
-
-        const {_id: userId, profile} = user
-            , Buttons = this.buttons.bind(this,userId)
-            , {thumbnail, userName, row, social} = styles
+    profile(data) {
+        const {thumbnail, userName, row, social} = styles
             , image = 'https://scontent.fsdu6-1.fna.fbcdn.net/v/t1.0-9/12241179_836594613117947_1920520166121142338_n.png?oh=c386343d1b611c7f04c52d46cb9634eb&oe=58FD8758'
 
         return (
+            <View style={social}>
+                <Image style={thumbnail} source={{ uri: image }} />
+                <Text style={userName}>{data.name}</Text>
+            </View>
+        )
+    }
+
+    renderUser(user) {
+        const {_id: userId, profile} = user
+            , Buttons = this.buttons.bind(this, userId)
+            , Profile = this.profile.bind(this, profile) 
+            , {row} = styles
+
+        return (
             <View style={row}>
-                <View style={social}>
-                    <Image style={thumbnail} source={{ uri: image }} />
-                    <Text style={userName}>{profile.name}</Text>
-                </View>
+                <Profile />
                 <Buttons />
             </View>
         )
-
     }
 
 
@@ -71,7 +77,6 @@ class StartUp extends Component {
                 <MeteorListView collection="users" renderRow={this.renderUser.bind(this)} enableEmptySections={true} />
             </View>
         )
-
     }
 
     render() {
@@ -84,9 +89,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    buttonsContainer:{
+    buttonsContainer: {
         flexDirection: 'row'
-    }, 
+    },
     row: {
         flexDirection: 'row',
         borderBottomWidth: 1,
@@ -101,12 +106,12 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     userName: {
-        fontSize: 20/*typography.normal*/,        
+        fontSize: 20/*typography.normal*/,
         marginBottom: 3,
-        flex: 2/3
+        flex: 2 / 3
     },
-    social:{
-        flex: 2/3,
+    social: {
+        flex: 2 / 3,
         flexDirection: 'row',
         alignItems: 'center'
     }
