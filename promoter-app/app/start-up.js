@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
-import Meteor, { createContainer, MeteorListView } from 'react-native-meteor'
+import Meteor, { createContainer, MeteorListView, MeteorComplexListView } from 'react-native-meteor'
 import Loading from 'ui/components/downloading.js'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { grid, color, typography } from 'ui/stylesheets/global.js'
@@ -10,7 +10,7 @@ Meteor.connect('ws://192.168.1.4:3000/websocket');
 class StartUp extends Component {
 
     icon(action, userId) {
-        let callback, iconName, color = 'black'
+        let callback, iconName, color = 'gray'
 
         if (action === 'accept') {
             callback = this.props.acceptUser.bind(this, userId)
@@ -68,13 +68,26 @@ class StartUp extends Component {
         )
     }
 
+    topBar(){
+        const {topBar, topBarText} = styles
+            , {name: partyName = ''} = this.props.party 
+
+        return (
+            <View style={topBar}>   
+                <Text style={topBarText}>{partyName}</Text>
+            </View>
+        )
+    }
 
     list() {
         const {container} = styles
+            , TopBar = this.topBar.bind(this)
+            , {usersRequesting} = this.props 
 
         return (
             <View style={container}>
-                <MeteorListView collection="users" renderRow={this.renderUser.bind(this)} enableEmptySections={true} />
+                <TopBar />
+                <MeteorComplexListView elements={()=>usersRequesting} renderRow={this.renderUser.bind(this)} enableEmptySections={true} />
             </View>
         )
     }
@@ -114,10 +127,20 @@ const styles = StyleSheet.create({
         flex: 2 / 3,
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    topBar: {
+        backgroundColor: 'gray',
+        paddingTop: 10,
+        paddingBottom: 10 
+    },
+    topBarText:{
+        color: 'white',
+        fontSize: typography.normal,
+        textAlign: 'center'
     }
 });
 
-const findUsers = usersList => Meteor.collection('users').find({ _id: { $in: usersList } }).map(user => user._id)
+const findUsers = usersList => Meteor.collection('users').find({ _id: { $in: usersList } })
 
 export default createContainer(() => {
 
@@ -129,8 +152,9 @@ export default createContainer(() => {
 
     return {
         userIsLoading: !usersSubscription.ready(),
-        refusedUsers: findUsers(refusedUsers),
-        acceptedUsers: findUsers(acceptedUsers),
+        party, 
+        refusedUsers: findUsers(refusedUsers).map(user => user._id),
+        acceptedUsers: findUsers(acceptedUsers).map(user => user._id),
         usersRequesting: findUsers(usersRequesting),
         acceptUser: userId => Meteor.call('party.acceptUser', { userId, partyId }),
         refuseUser: userId => Meteor.call('party.refuseUser', { userId, partyId })
