@@ -8,33 +8,68 @@ var printError = (err) => alert(err)
 class Database {
 
     constructor() {
-        this.meteorLogin = this.meteorLogin.bind(this)
+        this.meteorLogin = this.meteorLogin.bind(this) //TODO: Remove to LoginService 
         this.createContainer = createContainer
         this.subscribe = Meteor.subscribe
-        this.call = Meteor.call
+        this.call = Meteor.call // TODO: improve to consider connection errror
         this.collection = Meteor.collection
     }
 
-    connect() {       
+    connect() {
         const {subscribeToUserData} = this
 
         Meteor.connect('ws://192.168.1.4:3000/websocket');
 
         return new Promise((resolve, reject) => {
             const
-                onLoginResumed = () => { subscribeToUserData() ; resolve()},
+                onLoginResumed = () => { subscribeToUserData(); resolve() },
                 onError = error => reject(error),
+                //TODO: replace this.resumeLogin by loginService.resumeLogin
                 onConnected = () => { this.resumeLogin().then(onLoginResumed).catch(onError) }
 
             Meteor.ddp.on('connected', onConnected)
-            
-            setTimeout(() => { reject('Problemas de Conexão!') }, 3000*60)
+
+            setTimeout(() => { reject('Problemas de Conexão!') }, 3000 * 60)
         })
 
     }
 
-    subscribeToUserData(){
+    subscribeToUserData() {
+        //TODO: replace "database by this"
         database.subscribe("loggedUser")
+    }
+
+
+    loggedUser() {
+        //TODO: replace "database by this"
+        const allUserData = database.collection("users").findOne({ _id: Meteor.userId })
+            , partialUserData = Meteor.user()
+
+        return allUserData || partialUserData
+    }
+
+    logout() {
+        Meteor.logout()
+        LoginManager.logOut() //TODO: replace by loginService.logout()
+    }
+
+    userIsLogged() {
+        return !!this.loggedUser()
+    }
+
+    /***
+     * 
+     * LOGIN SERVICE RELATED METHODS. 
+     * 
+     * TODO: move to LoginService
+     * 
+     */
+
+    storeLoginData(token, userId) {
+        const Data = Meteor.getData()
+        AsyncStorage.setItem("loginToken", token);
+        Data._tokenIdSaved = token;
+        Meteor._userIdSaved = userId;
     }
 
     getAcessToken() {
@@ -46,26 +81,6 @@ class Database {
         return this.getAcessToken().then(meteorLogin)
     }
 
-    loggedUser() {
-        const allUserData = database.collection("users").findOne({ _id: Meteor.userId })
-            , partialUserData = Meteor.user()
-            
-        return  allUserData || partialUserData
-    }
-
-    logout() {
-        Meteor.logout()
-        LoginManager.logOut()
-    }
-
-    storeLoginData(token, userId) {
-        const Data = Meteor.getData()
-        AsyncStorage.setItem("loginToken", token);
-        Data._tokenIdSaved = token;
-        Meteor._userIdSaved = userId;
-    }
-
-
     meteorLogin(data) {
         const self = this
 
@@ -74,10 +89,10 @@ class Database {
             else {
                 const onEnd = (err, result) => {
                     if (err) {
-                        /*console.err(err);*/ 
+                        /*console.err(err);*/
                         reject(err)
                     }
-                    else{
+                    else {
                         self.storeLoginData(result.token, result.id)
                         resolve()
                     }
@@ -89,6 +104,7 @@ class Database {
 
     }
 
+    //TODO: replace by login and inside it do loginService.login()
     loginWithFacebook() {
         const {meteorLogin} = this
 
@@ -104,9 +120,6 @@ class Database {
 
     }
 
-    userIsLogged() {
-        return !!this.loggedUser()
-    }
 
 }
 
