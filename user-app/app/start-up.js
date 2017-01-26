@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { Navigation } from 'ui/components/navigation.js'
-import { database } from 'library/database.js'
-import SplashSreen from 'ui/pages/splash-screen.js'
 import Orientation from 'react-native-orientation'
+import { database } from 'library/database.js'
+import { Navigation } from 'ui/components/navigation.js'
+import SplashSreen from 'ui/pages/splash-screen.js'
 import NetworkError from 'ui/pages/network-error.js'
 
 export class StartUp extends Component {

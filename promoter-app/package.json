@@ -9,7 +9,6 @@
   "dependencies": {
     "react": "^15.4.1",
     "react-native": "0.39.2",
-    "react-native-fbsdk": "^0.5.0",
     "react-native-md-textinput": "^2.0.4",
     "react-native-meteor": "^1.0.3",
     "react-native-orientation": "git+https://git@github.com/yamill/react-native-orientation.git",
