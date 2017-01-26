@@ -18,7 +18,7 @@ export default class Login extends Component {
         const {goToPartiesList} = this
         
         database
-            .loginWithFacebook()
+            .login()
             .then(goToPartiesList)
             .catch(err => alert(err))
        

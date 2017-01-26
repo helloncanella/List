@@ -28,7 +28,8 @@ export class StartUp extends Component {
 		Orientation.lockToPortrait()
 	}
 
-	onConnectionError() {		
+	onConnectionError(error) {
+		console.log(error)		
 		this.setState({connectionError: true}) 
 	}
 	
