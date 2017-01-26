@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native'
+import { StyleSheet, Text, View  } from 'react-native'
 import Meteor, { createContainer } from 'react-native-meteor';
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
+
 import LoginService from 'library/login-service.js'
 
 var printError = (err) => alert(err)

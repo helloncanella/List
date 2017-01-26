@@ -1,4 +1,6 @@
 import Meteor from 'react-native-meteor';
+import { AsyncStorage } from 'react-native'
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
 
 export default FacebookLoginService = LoginService
 
