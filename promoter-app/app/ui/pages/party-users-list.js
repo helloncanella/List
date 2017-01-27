@@ -4,8 +4,8 @@ import Meteor, { createContainer, MeteorListView, MeteorComplexListView } from '
 import Loading from 'ui/components/downloading.js'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { grid, color, typography } from 'ui/stylesheets/global.js'
+import {database} from 'library/database.js'
 
-Meteor.connect('ws://192.168.1.4:3000/websocket');
 
 class StartUp extends Component {
 
@@ -57,7 +57,7 @@ class StartUp extends Component {
     renderUser(user) {
         const {_id: userId, profile} = user
             , Buttons = this.buttons.bind(this, userId)
-            , Profile = this.profile.bind(this, profile) 
+            , Profile = this.profile.bind(this, profile)
             , {row} = styles
 
         return (
@@ -68,13 +68,30 @@ class StartUp extends Component {
         )
     }
 
-    topBar(){
-        const {topBar, topBarText} = styles
-            , {name: partyName = ''} = this.props.party 
+    logout() {
+
+        const {navigator} = this.props
+            , signout = () => {
+                database.logout()
+                navigator.push({ name: 'login' })
+            }
 
         return (
-            <View style={topBar}>   
+            <TouchableHighlight onPress={signout} underlayColor='transparent'>
+                <Text style={{}}>logout</Text>
+            </TouchableHighlight>
+        )
+    }
+
+    topBar() {
+        const {topBar, topBarText} = styles
+            , {name: partyName = ''} = this.props.party
+            , Logout = ()=>this.logout()
+
+        return (
+            <View style={[topBar, grid]}>
                 <Text style={topBarText}>{partyName}</Text>
+                <Logout />
             </View>
         )
     }
@@ -82,12 +99,12 @@ class StartUp extends Component {
     list() {
         const {container} = styles
             , TopBar = this.topBar.bind(this)
-            , {usersRequesting} = this.props 
+            , {usersRequesting} = this.props
 
         return (
             <View style={container}>
                 <TopBar />
-                <MeteorComplexListView elements={()=>usersRequesting} renderRow={this.renderUser.bind(this)} enableEmptySections={true} />
+                <MeteorComplexListView elements={() => usersRequesting} renderRow={this.renderUser.bind(this)} enableEmptySections={true} />
             </View>
         )
     }
@@ -132,18 +149,24 @@ const styles = StyleSheet.create({
     topBar: {
         backgroundColor: 'gray',
         paddingTop: 10,
-        paddingBottom: 10 
+        paddingBottom: 10,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
-    topBarText:{
+    topBarText: {
         color: 'white',
-        fontSize: typography.normal,
-        textAlign: 'center'
+        fontSize: typography.normal,        
+    },
+    logout: {
+        color: 'white',
+        fontSize: 15    
     }
 });
 
 const findUsers = usersList => Meteor.collection('users').find({ _id: { $in: usersList } })
 
-export default createContainer(() => {
+export default createContainer(props => {
 
     const usersSubscription = Meteor.subscribe("users.socialData")
         , partiesSubscription = Meteor.subscribe("parties")
@@ -153,12 +176,13 @@ export default createContainer(() => {
 
     return {
         userIsLoading: !usersSubscription.ready(),
-        party, 
+        party,
         refusedUsers: findUsers(refusedUsers).map(user => user._id),
         acceptedUsers: findUsers(acceptedUsers).map(user => user._id),
         usersRequesting: findUsers(usersRequesting),
         acceptUser: userId => Meteor.call('party.acceptUser', { userId, partyId }),
-        refuseUser: userId => Meteor.call('party.refuseUser', { userId, partyId })
+        refuseUser: userId => Meteor.call('party.refuseUser', { userId, partyId }),
+        navigator: props.navigator
     }
 
 }, StartUp)

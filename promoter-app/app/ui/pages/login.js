@@ -23,28 +23,34 @@ export default class Login extends Component {
 
     }
 
-    shouldComponentUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState) {
         const {username, password, loginError} = nextState
-        
-        if(loginError !== this.state.loginError) return true
-        else if(username === this.state.username || password === this.state.password ) return false            
-        
+
+        if (loginError !== this.state.loginError) return true
+        else if (username === this.state.username || password === this.state.password) return false
+
         return true
     }
 
     showLoginError(error) {
-        let message 
-        const {reason} = error
+        let message
 
-        if(reason === "User not found") message = "Usuário não encontrado" 
-        else if(reason === "Incorrect password") message = "Senha incorreta"
+        if (typeof error === 'string') {
+            message = error
+        } else {
+            const {reason} = error
 
-        this.setState({loginError: message})
+            if (reason === "User not found") message = "Usuário não encontrado"
+            else if (reason === "Incorrect password") message = "Senha incorreta"
+        }
+
+        this.setState({ loginError: message })
+
 
     }
 
     goToPartyUsersList() {
-        this.props.navigator.push({name:'party-users-list'})
+        this.props.navigator.push({ name: 'party-users-list' })
     }
 
     login() {
@@ -52,10 +58,16 @@ export default class Login extends Component {
 
         const {username, password} = this.state
 
-        database
-            .login({ username, password })
-            .then(goToPartyUsersList)
-            .catch(showLoginError)
+        if (!username) {
+            showLoginError('Informe o nome do usuário')
+        } else if (!password) { 
+            showLoginError('Informe a senha') 
+        }else {
+            database
+                .login({ username, password })
+                .then(goToPartyUsersList)
+                .catch(showLoginError)
+        }
     }
 
     loginButton() {
@@ -81,18 +93,18 @@ export default class Login extends Component {
             , LoginButton = () => this.loginButton()
             , {onChangeText} = this
             , {username, password} = this.state
-            
+
 
         return (
             <View style={[grid, form]}>
-                <TextField value = {username} label={'Nome de usuário'} {...textStyles} onChangeText={text => onChangeText('username', text)} />
-                <TextField value = {password} label={'Senha'} {...textStyles} onChangeText={text => onChangeText('password', text)} />
+                <TextField value={username} label={'Nome de usuário'} {...textStyles} onChangeText={text => onChangeText('username', text)} />
+                <TextField value={password} label={'Senha'} {...textStyles} onChangeText={text => onChangeText('password', text)} />
                 <LoginButton />
             </View>
         )
     }
 
-    loginError(){
+    loginError() {
         const {loginError} = styles
         return <Text style={loginError}>{this.state.loginError}</Text>
     }

@@ -16,7 +16,12 @@ export default class LoginService {
 
     resumeLogin() {
         const {login} = this
-        return this.fetchStoredUserData().then(login)
+            , onFetched = ({username, password}) => {
+                if (username && password) return login({username, password})
+                else return 
+            }
+
+        return this.fetchStoredUserData().then(onFetched)
     }
 
     login({username, password}) {
@@ -38,7 +43,7 @@ export default class LoginService {
     }
 
     logout() {
-        AsyncStorage.multiRemove(['username', 'password'], err => console.err(err))
+        AsyncStorage.multiRemove(['username', 'password'])
     }
 
     /**
@@ -61,9 +66,7 @@ export default class LoginService {
             , fetchPassword = AsyncStorage.getItem('password')
 
         return Promise.all([fetchUsername, fetchPassword]).then(([username, password]) => {
-            if (!username) throw 'fetched username by AsyncStorage is empty'
-            else if (!password) throw 'fetched password by AsyncStorage is empty'
-            else return { username, password }
+            return { username, password }
         })
     }
 }
