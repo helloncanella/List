@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 import Meteor, { createContainer, MeteorListView, MeteorComplexListView } from 'react-native-meteor'
 import Loading from 'ui/components/downloading.js'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { grid, color, typography } from 'ui/stylesheets/global.js'
+import { grid, color, typography, pressStyle } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
-
+import { openFacebook } from 'library/helpers.js'
 
 class StartUp extends Component {
 
@@ -42,22 +42,28 @@ class StartUp extends Component {
         )
     }
 
-    profile(data) {
+
+
+    profile({link, name}) {
         const {thumbnail, userName, row, social} = styles
             , image = 'https://scontent.fsdu6-1.fna.fbcdn.net/v/t1.0-9/12241179_836594613117947_1920520166121142338_n.png?oh=c386343d1b611c7f04c52d46cb9634eb&oe=58FD8758'
+            , onPress = () => openFacebook(link)
 
         return (
-            <View style={social}>
-                <Image style={thumbnail} source={{ uri: image }} />
-                <Text style={userName}>{data.name}</Text>
-            </View>
+            <TouchableHighlight {...pressStyle} onPress={onPress}>
+                <View style={social}>
+                    <Image style={thumbnail} source={{ uri: image }} />
+                    <Text style={userName}>{name}</Text>
+                </View>
+            </TouchableHighlight>
         )
     }
 
     renderUser(user) {
-        const {_id: userId, profile} = user
+        const {_id: userId, services} = user
+            , {link, name} = services.facebook
             , Buttons = this.buttons.bind(this, userId)
-            , Profile = this.profile.bind(this, profile)
+            , Profile = this.profile.bind(this, {link, name})
             , {row} = styles
 
         return (
