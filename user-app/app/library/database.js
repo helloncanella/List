@@ -41,8 +41,8 @@ class Database {
 
     }
 
-    login(){
-        return this.loginService.login() //Promise
+    login(userData){
+        return this.loginService.login(userData) //Promise
     }
 
     logout() {

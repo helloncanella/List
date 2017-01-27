@@ -29,7 +29,6 @@ class Database {
                 onError = error => reject(error),
                 
                 onConnected = () => { 
-                    console.log(this.loginService, this)
                     this.loginService.resumeLogin()
                         .then(onLoginResumed)
                         .catch(onError) 
@@ -42,8 +41,9 @@ class Database {
 
     }
 
-    login(){
-        return this.loginService.login() //Promise
+    login(userData){
+        console.log(userData)
+        return this.loginService.login(userData) //Promise
     }
 
     logout() {
