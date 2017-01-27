@@ -4,7 +4,7 @@ import Meteor, { createContainer, MeteorListView, MeteorComplexListView } from '
 import Loading from 'ui/components/downloading.js'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { grid, color, typography } from 'ui/stylesheets/global.js'
-import {database} from 'library/database.js'
+import { database } from 'library/database.js'
 
 
 class StartUp extends Component {
@@ -69,7 +69,7 @@ class StartUp extends Component {
     }
 
     logout() {
-
+        //TODO: Move to specialized component
         const {navigator} = this.props
             , signout = () => {
                 database.logout()
@@ -84,9 +84,10 @@ class StartUp extends Component {
     }
 
     topBar() {
+        //TODO: Move to specialized component
         const {topBar, topBarText} = styles
             , {name: partyName = ''} = this.props.party
-            , Logout = ()=>this.logout()
+            , Logout = () => this.logout()
 
         return (
             <View style={[topBar, grid]}>
@@ -156,11 +157,11 @@ const styles = StyleSheet.create({
     },
     topBarText: {
         color: 'white',
-        fontSize: typography.normal,        
+        fontSize: typography.normal,
     },
     logout: {
         color: 'white',
-        fontSize: 15    
+        fontSize: 15
     }
 });
 
@@ -171,7 +172,8 @@ export default createContainer(props => {
     const usersSubscription = Meteor.subscribe("users.socialData")
         , partiesSubscription = Meteor.subscribe("parties")
 
-    const party = Meteor.collection("parties").findOne() || {}
+    const userId = Meteor.user() ? Meteor.user()._id : null
+        , party = Meteor.collection("parties").findOne({ promoters: userId }) || {}
         , {refusedUsers = [], acceptedUsers = [], usersRequesting = [], _id: partyId } = party
 
     return {
