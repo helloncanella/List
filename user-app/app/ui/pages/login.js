@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 import { pressStyle, typography, grid, color } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
+import Logo from 'ui/components/logo.js'
 
 export default class Login extends Component {
     constructor() {
@@ -29,7 +30,7 @@ export default class Login extends Component {
 
         return (
             <View style={[container, grid]}>
-                <Text style={title}>UListMe</Text>
+                <Logo />
                 <TouchableHighlight onPress={this.loginWithFacebook} {...pressStyle} >
                     <Image style={image} source={{ uri: imageUrl }} />
                 </TouchableHighlight>

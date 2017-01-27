@@ -44,15 +44,14 @@ class StartUp extends Component {
 
 
 
-    profile({link, name}) {
-        const {thumbnail, userName, row, social} = styles
-            , image = 'https://scontent.fsdu6-1.fna.fbcdn.net/v/t1.0-9/12241179_836594613117947_1920520166121142338_n.png?oh=c386343d1b611c7f04c52d46cb9634eb&oe=58FD8758'
+    profile({link, name, picture}) {
+        const {thumbnail, userName, row, social, socialTouch} = styles
             , onPress = () => openFacebook(link)
 
         return (
-            <TouchableHighlight {...pressStyle} onPress={onPress}>
+            <TouchableHighlight {...pressStyle} onPress={onPress} style={socialTouch}>
                 <View style={social}>
-                    <Image style={thumbnail} source={{ uri: image }} />
+                    <Image style={thumbnail} source={{ uri: picture }} />
                     <Text style={userName}>{name}</Text>
                 </View>
             </TouchableHighlight>
@@ -61,9 +60,10 @@ class StartUp extends Component {
 
     renderUser(user) {
         const {_id: userId, services} = user
-            , {link, name} = services.facebook
+            , {link, name, picture:image } = services.facebook
+            , picture = image.data.url
             , Buttons = this.buttons.bind(this, userId)
-            , Profile = this.profile.bind(this, {link, name})
+            , Profile = this.profile.bind(this, {link, name, picture})
             , {row} = styles
 
         return (
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
         flex: 2 / 3
     },
     social: {
-        flex: 2 / 3,
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -168,6 +167,9 @@ const styles = StyleSheet.create({
     logout: {
         color: 'white',
         fontSize: 15
+    },
+    socialTouch: {
+        flex: 2 / 3        
     }
 });
 

@@ -28,11 +28,11 @@ const registerHandler = () => {
     // If this isn't facebook login then we don't care about it. No need to proceed.
     if (!data) {
       return undefined;
-    }
+    } 
 
     // The fields we care about (same as Meteor's)
     const whitelisted = ['id', 'email', 'name', 'first_name',
-     'last_name', 'link', 'gender', 'locale', 'age_range'];
+     'last_name', 'link', 'gender', 'locale', 'age_range', 'picture'];
 
     // Get our user's identifying information. This also checks if the accessToken
     // is valid. If not it will error out.
