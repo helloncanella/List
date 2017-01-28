@@ -21,8 +21,8 @@ class Database {
     connect() {
         const {subscribeToUserData} = this
 
-        //Meteor.connect('ws://192.168.1.4:3000/websocket');
-        Meteor.connect('ws://ulistme.herokuapp.com/websocket')
+        Meteor.connect('ws://192.168.1.4:3000/websocket');
+        //Meteor.connect('ws://ulistme.herokuapp.com/websocket')
 
         return new Promise((resolve, reject) => {
             const

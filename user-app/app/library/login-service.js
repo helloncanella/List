@@ -30,7 +30,7 @@ export default class LoginService {
         return LoginManager
             .logInWithReadPermissions(['public_profile'])
             .then(onSucess)
-            .catch(err => { throw err })
+            .catch(err => { console.log(err); throw err })
 
     }
 

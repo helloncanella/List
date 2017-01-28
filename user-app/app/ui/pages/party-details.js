@@ -153,7 +153,8 @@ export default database.createContainer(props => {
     const {navigator, id: partyId} = props
         , party = database.collection('parties').findOne({ _id: partyId })
         , {usersRequesting:users = [] } = party
-        , userId = database.loggedUser()._id
+        , user = database.loggedUser()
+        , userId = user ? user._id : ''
 
     return {
         loadingParty: !partySubscription.ready(),
