@@ -37,7 +37,7 @@ class Database {
 
             Meteor.ddp.on('connected', onConnected)
 
-            setTimeout(() => { reject('Problemas de Conexão!') }, 3000 * 60)
+            setTimeout(() => { reject('Problemas de Conexão!') }, 6000 * 60)
         })
 
     }
