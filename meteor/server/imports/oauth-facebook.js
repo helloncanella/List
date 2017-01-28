@@ -22,17 +22,17 @@ const init = () => {
 }
 
 const registerHandler = () => {
-  Accounts.registerLoginHandler('facebook', function(params) {
+  Accounts.registerLoginHandler('facebook', function (params) {
     const data = params.facebook;
 
     // If this isn't facebook login then we don't care about it. No need to proceed.
     if (!data) {
       return undefined;
-    } 
+    }
 
     // The fields we care about (same as Meteor's)
     const whitelisted = ['id', 'email', 'name', 'first_name',
-     'last_name', 'link', 'gender', 'locale', 'age_range', 'picture'];
+      'last_name', 'link', 'gender', 'locale', 'age_range', 'picture'];
 
     // Get our user's identifying information. This also checks if the accessToken
     // is valid. If not it will error out.
@@ -48,7 +48,9 @@ const registerHandler = () => {
     // Search for an existing user with that facebook id
     const existingUser = Meteor.users.findOne({ 'services.facebook.id': identity.id });
 
-    let userId;
+    let userId
+        , email = identity.email || Math.random() //Math.random() -> trying to guarantee the emails uniquess ( TODO:  REMOVE GAMBIARRA! :) ) 
+
     if (existingUser) {
       userId = existingUser._id;
 
@@ -60,12 +62,14 @@ const registerHandler = () => {
         prefixedData[`services.facebook.${key}`] = val;
       });
 
+      prefixedData.emails =  { address: email, verified: true }
+
       Meteor.users.update({ _id: userId }, {
-        $set: prefixedData,
-        $addToSet: { emails: { address: identity.email, verified: true } }
+        $set: prefixedData
       });
 
     } else {
+
       // Create our user
       userId = Meteor.users.insert({
         services: {
@@ -74,7 +78,7 @@ const registerHandler = () => {
         profile: { name: identity.name },
         parties: [],
         emails: [{
-          address: identity.email,
+          address: email, //REMOVE MATH RANDOM IN PRODCTION
           verified: true
         }]
       });
@@ -96,7 +100,7 @@ const getIdentity = (accessToken, fields) => {
     }).data;
   } catch (err) {
     throw _.extend(new Error("Failed to fetch identity from Facebook. " + err.message),
-                   {response: err.response});
+      { response: err.response });
   }
 };
 
