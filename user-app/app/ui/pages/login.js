@@ -8,19 +8,19 @@ export default class Login extends Component {
     constructor() {
         super()
         this.loginWithFacebook = this.loginWithFacebook.bind(this)
-        this.goToPartiesList = this.goToPartiesList.bind(this)
+        this.goToDashBoard = this.goToDashBoard.bind(this)
     }
 
-    goToPartiesList() {
-        this.props.navigator.push({ name: 'parties' })
+    goToDashBoard() {
+        this.props.navigator.push({ name: 'dashboard' })
     }
 
     loginWithFacebook() {
-        const {goToPartiesList} = this
+        const {goToDashBoard} = this
         
         database
             .login()
-            .then(goToPartiesList)
+            .then(goToDashBoard)
             .catch(err => alert(err))       
     }
 
