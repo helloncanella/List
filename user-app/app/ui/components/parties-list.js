@@ -16,36 +16,6 @@ export class PartiesList extends Component {
         this.props.navigator.push({ name: 'party', id })
     }
 
-    
-
-    logout() {
-        //TODO: Move to an especialized component
-        const logoutStyle = {           
-            color: 'white',
-            fontSize: 20,
-        }
-
-        const touchContainer = {
-            // zIndex: 1,
-            position: 'absolute',
-            backgroundColor: 'rgba(0,0,0,0)',
-            right: 15,
-            top: 15
-        }
-
-        const {navigator} = this.props
-            , onPress = () => {
-                navigator.push({ name: 'login' })
-                database.logout()
-            }
-
-        return (
-            <TouchableHighlight {...pressStyle} onPress={onPress} style={touchContainer}>
-                <Text style={logoutStyle}>sign out</Text>
-            </TouchableHighlight>
-        )
-    }
-
     renderParty(party) {
         const {image, text, partyContainer, partyName, partyDay} = styles
             , {photosUrl, name, address, date, hour, canvas, _id: id} = party
@@ -68,16 +38,19 @@ export class PartiesList extends Component {
     render() {
         const {container, text, background} = styles
             , { loadingParties } = this.props
-            , Logout = () => this.logout()
+            
 
         return (
-            <View style={[container, background]}>
+            <View style={[background]}>
                 <MeteorListView
                     collection="parties"
                     renderRow={this.renderParty}
                     enableEmptySections={true}
+                    horizontal = {true}
+                    showsHorizontalScrollIndicator={false}
+                    pagingEnabled={true}
                     />
-                <Logout />
+                
             </View>
         );
     }
@@ -102,7 +75,8 @@ export default createContainer(() => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        position: 'relative'
+        position: 'relative',
+        justifyContent: 'center'
     },
     partyContainer: {
         marginBottom: 15,
