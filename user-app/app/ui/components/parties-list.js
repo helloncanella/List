@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 import { typography, pressStyle, grid, color, imageDimensions } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
 import { MeteorListView } from 'react-native-meteor'
@@ -28,7 +28,7 @@ export class PartiesList extends Component {
                     <Image style={imageDimensions()} source={{ uri: photosUrl[0] }} resizeMode="cover" />
                     <View style={grid}>
                         <Text style={partyName}>{name}</Text>
-                        <Text style={partyDay}>{date} - {hour}</Text>
+                        <Text style={partyDay}>{date}- {hour}</Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -38,19 +38,17 @@ export class PartiesList extends Component {
     render() {
         const {container, text, background} = styles
             , { loadingParties } = this.props
-            
+
+
+
 
         return (
-            <View style={[background]}>
+            <View style={[background, container]}>
                 <MeteorListView
                     collection="parties"
                     renderRow={this.renderParty}
                     enableEmptySections={true}
-                    horizontal = {true}
-                    showsHorizontalScrollIndicator={false}
-                    pagingEnabled={true}
                     />
-                
             </View>
         );
     }
@@ -76,6 +74,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         position: 'relative',
+        zIndex: 10,
         justifyContent: 'center'
     },
     partyContainer: {

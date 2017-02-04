@@ -150,6 +150,8 @@ const styles = StyleSheet.create({
 export default database.createContainer(props => {
     const partySubscription = database.subscribe('party')
 
+    
+
     const {navigator, id: partyId} = props
         , party = database.collection('parties').findOne({ _id: partyId })
         , {usersRequesting:users = [] } = party
