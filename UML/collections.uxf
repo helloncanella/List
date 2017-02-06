@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>165</x>
+      <y>231</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>Promoter::User
+--
+- _id: String
+- nightClubId: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>715</x>
+      <y>0</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>Doorman::User
+--
+- _id: String
+- nightClubId: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>0</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>Notifications::User
+--
+- _id: String
+- nightClubId: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1232</x>
+      <y>110</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>Party::User
+--
+- _id: String
+- nightClubId: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>517</x>
+      <y>352</y>
+      <w>231</w>
+      <h>187</h>
+    </coordinates>
+    <panel_attributes>Nightclub
+--
+- _id: string
+- promotersId: []string 
+- doormansId: []string
+- partiesId: []string
+- logoUrl: string
+- photosUrl: []string
+- name: string
+- address: Adress
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>396</x>
+      <y>528</y>
+      <w>209</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1..few
+</panel_attributes>
+    <additional_attributes>170.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>528</y>
+      <w>88</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1..few
+</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>638</x>
+      <y>528</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1..many
+</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>352</x>
+      <y>715</y>
+      <w>110</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>Promoter</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>517</x>
+      <y>715</y>
+      <w>110</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>Doorman</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>781</x>
+      <y>715</y>
+      <w>110</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>Party</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>891</y>
+      <w>110</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>Guest</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>814</x>
+      <y>737</y>
+      <w>88</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..many
+m2=1..many
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1001</x>
+      <y>528</y>
+      <w>110</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1045</x>
+      <y>550</y>
+      <w>121</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1..squillions
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1012</x>
+      <y>704</y>
+      <w>110</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>Notifications</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>528</y>
+      <w>110</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>649</x>
+      <y>715</y>
+      <w>110</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>Address</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>165</x>
+      <y>22</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>Party::User
+--
+- _id: String
+- nightClubId: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
