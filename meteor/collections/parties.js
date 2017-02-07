@@ -1,238 +1,111 @@
-const partiesList = [
-	{
-		name: "Santo Pagode",
-		photosUrl: ["http://www.vale1convite.com.br/site/img/eventos/flyer/1111145835.jpg"],
-		address: "Rua Fernando Siqueira, 30 - Taquara",
-		date: "27 de abril",
-		hour: "22h",
-		descriptionTopics: [
-			{ 
-				title: 'A Festa',
-				text: `Gente bonita, descontração e aquela roda de samba pra você mostrar que é bamba! Esse é o clima da NOSSA SEGUNDA na Pink Elephant Rio!
+import Nightclubs from '/collections/nightclubs.js'
 
-NESSA SEGUNDA a nossa Roda de Samba fica sob o comando do nosso querido amigo DINEY que vem mostrando o melhor do samba e do pagode!
-
-E MAIS! NESSA EDIÇÃO trazemos VÁRIOS CONVIDADOS para melhorar ainda mais a sua noite!!
-
-Pensou que iríamos esquecer do MELHOR DO FUNK?! Quem fica no comando é o nosso querido DJ PRESUNTINHO diretamente da FM O Dia fazendo aquele furdunço na NOSSA SEGUNDA!!
-
-Durante os intervalos a pista não para ao som do nosso residente DJ Raphael De Luca!
-
-Completando a roda, uma super PROMOÇÃO DE COMBOS! 
-
-Na compra de um combo de SMIRNOFF ou de RED LABEL, a 2ª garrafa é por nossa conta! PROMOÇÃO VÁLIDA até às 2h !!!
-
-E na compra de UMA GARRAFA DE CHRISTIAN AUDIGIER ganha OUTRA GARRAFA a NOITE TODA!!
-
-PENSA QUE ACABOU?! Não esquecemos das meninas! OPEN BAR para ELAS até 1H DA MANHÃ de CAIPIRINHA!!
-
-Coloque seu nome na lista e pode se preparar para uma noite sensacional. Afinal, "quem não gosta de samba bom sujeito não é"!`
-			},
-			{
-				title: "Music by",
-				text: `=> DINEY & CONVIDADOS
-=> DJ PRESUNTINHO (FM O DIA)
-=> RAPHAEL DE LUCA
-www.facebook.com/djraphaeldeluca`
-			}			
-		]
-	},
-	{
-		name: "Loft in Esperia",
-		photosUrl: ["http://webcriativo.com.br/grafica/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/f/l/flyer-balada-_1.jpg"],
-		address: "Santana",
-		date: "16 de Maio",
-		hour: "16h",
-		descriptionTopics: [
-			{
-				title: 'A Festa',
-				text: `Gente bonita, descontração e aquela roda de samba pra você mostrar que é bamba! Esse é o clima da NOSSA SEGUNDA na Pink Elephant Rio!
-
-NESSA SEGUNDA a nossa Roda de Samba fica sob o comando do nosso querido amigo DINEY que vem mostrando o melhor do samba e do pagode!
-
-E MAIS! NESSA EDIÇÃO trazemos VÁRIOS CONVIDADOS para melhorar ainda mais a sua noite!!
-
-Pensou que iríamos esquecer do MELHOR DO FUNK?! Quem fica no comando é o nosso querido DJ PRESUNTINHO diretamente da FM O Dia fazendo aquele furdunço na NOSSA SEGUNDA!!
-
-Durante os intervalos a pista não para ao som do nosso residente DJ Raphael De Luca!
-
-Completando a roda, uma super PROMOÇÃO DE COMBOS! 
-
-Na compra de um combo de SMIRNOFF ou de RED LABEL, a 2ª garrafa é por nossa conta! PROMOÇÃO VÁLIDA até às 2h !!!
-
-E na compra de UMA GARRAFA DE CHRISTIAN AUDIGIER ganha OUTRA GARRAFA a NOITE TODA!!
-
-PENSA QUE ACABOU?! Não esquecemos das meninas! OPEN BAR para ELAS até 1H DA MANHÃ de CAIPIRINHA!!
-
-Coloque seu nome na lista e pode se preparar para uma noite sensacional. Afinal, "quem não gosta de samba bom sujeito não é"!`
-			},
-			{
-				title: "Music by",
-				text: `=> DINEY & CONVIDADOS
-=> DJ PRESUNTINHO (FM O DIA)
-=> RAPHAEL DE LUCA
-www.facebook.com/djraphaeldeluca`
-			}			
-		]
-	},
-	{
-		name: "The One",
-		photosUrl: ["http://www.baladacerta.com.br/images/eventos/57778.jpg"],
-		address: "Rua Fernando Siqueira, 30 - Taquara",
-		date: "30 de abril",
-		hour: "23h",
-		descriptionTopics: [
-			{
-				title: 'A Festa',
-				text: `Gente bonita, descontração e aquela roda de samba pra você mostrar que é bamba! Esse é o clima da NOSSA SEGUNDA na Pink Elephant Rio!
-
-NESSA SEGUNDA a nossa Roda de Samba fica sob o comando do nosso querido amigo DINEY que vem mostrando o melhor do samba e do pagode!
-
-E MAIS! NESSA EDIÇÃO trazemos VÁRIOS CONVIDADOS para melhorar ainda mais a sua noite!!
-
-Pensou que iríamos esquecer do MELHOR DO FUNK?! Quem fica no comando é o nosso querido DJ PRESUNTINHO diretamente da FM O Dia fazendo aquele furdunço na NOSSA SEGUNDA!!
-
-Durante os intervalos a pista não para ao som do nosso residente DJ Raphael De Luca!
-
-Completando a roda, uma super PROMOÇÃO DE COMBOS! 
-
-Na compra de um combo de SMIRNOFF ou de RED LABEL, a 2ª garrafa é por nossa conta! PROMOÇÃO VÁLIDA até às 2h !!!
-
-E na compra de UMA GARRAFA DE CHRISTIAN AUDIGIER ganha OUTRA GARRAFA a NOITE TODA!!
-
-PENSA QUE ACABOU?! Não esquecemos das meninas! OPEN BAR para ELAS até 1H DA MANHÃ de CAIPIRINHA!!
-
-Coloque seu nome na lista e pode se preparar para uma noite sensacional. Afinal, "quem não gosta de samba bom sujeito não é"!`
-			},
-			{
-				title: "Music by",
-				text: `=> DINEY & CONVIDADOS
-=> DJ PRESUNTINHO (FM O DIA)
-=> RAPHAEL DE LUCA
-www.facebook.com/djraphaeldeluca`
-			}			
-		]
-	},
-	{
-		name: "Azurra",
-		photosUrl: ["https://ibalasa.files.wordpress.com/2008/07/azurra1.jpg"],
-		address: "Rua Fernando Siqueira, 30 - Taquara",
-		date: "30 de abril",
-		hour: "23h",
-		descriptionTopics: [
-			{
-				title: 'A Festa',
-				text: `Gente bonita, descontração e aquela roda de samba pra você mostrar que é bamba! Esse é o clima da NOSSA SEGUNDA na Pink Elephant Rio!
-
-NESSA SEGUNDA a nossa Roda de Samba fica sob o comando do nosso querido amigo DINEY que vem mostrando o melhor do samba e do pagode!
-
-E MAIS! NESSA EDIÇÃO trazemos VÁRIOS CONVIDADOS para melhorar ainda mais a sua noite!!
-
-Pensou que iríamos esquecer do MELHOR DO FUNK?! Quem fica no comando é o nosso querido DJ PRESUNTINHO diretamente da FM O Dia fazendo aquele furdunço na NOSSA SEGUNDA!!
-
-Durante os intervalos a pista não para ao som do nosso residente DJ Raphael De Luca!
-
-Completando a roda, uma super PROMOÇÃO DE COMBOS! 
-
-Na compra de um combo de SMIRNOFF ou de RED LABEL, a 2ª garrafa é por nossa conta! PROMOÇÃO VÁLIDA até às 2h !!!
-
-E na compra de UMA GARRAFA DE CHRISTIAN AUDIGIER ganha OUTRA GARRAFA a NOITE TODA!!
-
-PENSA QUE ACABOU?! Não esquecemos das meninas! OPEN BAR para ELAS até 1H DA MANHÃ de CAIPIRINHA!!
-
-Coloque seu nome na lista e pode se preparar para uma noite sensacional. Afinal, "quem não gosta de samba bom sujeito não é"!`
-			},
-			{
-				title: "Music by",
-				text: `=> DINEY & CONVIDADOS
-=> DJ PRESUNTINHO (FM O DIA)
-=> RAPHAEL DE LUCA
-www.facebook.com/djraphaeldeluca`
-			}			
-		]
-	},
-	{
-		name: "Spirits",
-		photosUrl: ["https://agenciadsign.files.wordpress.com/2011/04/flyer_sprits-20abr_pp.jpg"],
-		address: "Rua Fernando Siqueira, 30 - Taquara",
-		date: "30 de abril",
-		hour: "23h",
-		descriptionTopics: [
-			{
-				title: 'A Festa',
-				text: `Gente bonita, descontração e aquela roda de samba pra você mostrar que é bamba! Esse é o clima da NOSSA SEGUNDA na Pink Elephant Rio!
-
-NESSA SEGUNDA a nossa Roda de Samba fica sob o comando do nosso querido amigo DINEY que vem mostrando o melhor do samba e do pagode!
-
-E MAIS! NESSA EDIÇÃO trazemos VÁRIOS CONVIDADOS para melhorar ainda mais a sua noite!!
-
-Pensou que iríamos esquecer do MELHOR DO FUNK?! Quem fica no comando é o nosso querido DJ PRESUNTINHO diretamente da FM O Dia fazendo aquele furdunço na NOSSA SEGUNDA!!
-
-Durante os intervalos a pista não para ao som do nosso residente DJ Raphael De Luca!
-
-Completando a roda, uma super PROMOÇÃO DE COMBOS! 
-
-Na compra de um combo de SMIRNOFF ou de RED LABEL, a 2ª garrafa é por nossa conta! PROMOÇÃO VÁLIDA até às 2h !!!
-
-E na compra de UMA GARRAFA DE CHRISTIAN AUDIGIER ganha OUTRA GARRAFA a NOITE TODA!!
-
-PENSA QUE ACABOU?! Não esquecemos das meninas! OPEN BAR para ELAS até 1H DA MANHÃ de CAIPIRINHA!!
-
-Coloque seu nome na lista e pode se preparar para uma noite sensacional. Afinal, "quem não gosta de samba bom sujeito não é"!`
-			},
-			{
-				title: "Music by",
-				text: `=> DINEY & CONVIDADOS
-=> DJ PRESUNTINHO (FM O DIA)
-=> RAPHAEL DE LUCA
-www.facebook.com/djraphaeldeluca`
-			}			
-		]
-	}, 
-	{
-		name: "Diney e Convidados",
-		photosUrl: ["https://scontent.fsdu6-1.fna.fbcdn.net/v/t1.0-9/16195888_1222573647828296_3833336958718484209_n.jpg?oh=24ed21ee1989bde617af3aa9d75d87cf&oe=590ECBB2"],
-		address: "Rua Fernando Siqueira, 30 - Taquara",
-		date: "30 de abril",
-		hour: "23h",
-		descriptionTopics: [
-			{
-				title: 'A Festa',
-				text: `Gente bonita, descontração e aquela roda de samba pra você mostrar que é bamba! Esse é o clima da NOSSA SEGUNDA na Pink Elephant Rio!
-
-NESSA SEGUNDA a nossa Roda de Samba fica sob o comando do nosso querido amigo DINEY que vem mostrando o melhor do samba e do pagode!
-
-E MAIS! NESSA EDIÇÃO trazemos VÁRIOS CONVIDADOS para melhorar ainda mais a sua noite!!
-
-Pensou que iríamos esquecer do MELHOR DO FUNK?! Quem fica no comando é o nosso querido DJ PRESUNTINHO diretamente da FM O Dia fazendo aquele furdunço na NOSSA SEGUNDA!!
-
-Durante os intervalos a pista não para ao som do nosso residente DJ Raphael De Luca!
-
-Completando a roda, uma super PROMOÇÃO DE COMBOS! 
-
-Na compra de um combo de SMIRNOFF ou de RED LABEL, a 2ª garrafa é por nossa conta! PROMOÇÃO VÁLIDA até às 2h !!!
-
-E na compra de UMA GARRAFA DE CHRISTIAN AUDIGIER ganha OUTRA GARRAFA a NOITE TODA!!
-
-PENSA QUE ACABOU?! Não esquecemos das meninas! OPEN BAR para ELAS até 1H DA MANHÃ de CAIPIRINHA!!
-
-Coloque seu nome na lista e pode se preparar para uma noite sensacional. Afinal, "quem não gosta de samba bom sujeito não é"!`
-			},
-			{
-				title: "Music by",
-				text: `=> DINEY & CONVIDADOS
-=> DJ PRESUNTINHO (FM O DIA)
-=> RAPHAEL DE LUCA
-www.facebook.com/djraphaeldeluca`
-			}			
-		]
-	}
-
-]
 
 const Parties = new Meteor.Collection('parties')
 
+
 if (Parties.find().count() === 0) {
+	const nightClub = Nightclubs.findOne({}, { fields: { name: 1, _id: 1, logoUrl: 1, addresses: 1 } })
+
+	const partiesList = [
+		 
+		{
+			name: "Carnaval do Distrital",
+			photosUrl: ["https://scontent.fsdu6-1.fna.fbcdn.net/v/t1.0-9/16195353_1296868433721822_4281286116478477370_n.png?oh=0dd16ca232bd84641cbd227bb339f6b8&oe=59452251"],
+			date: "27 de abril",
+			startDate: "",
+			endDate: "",
+			hour: "22h",
+			nightClub,
+			addresses: [
+				{
+					street: 'R. Opala',
+					number: 'S/N',
+					city: 'Belo Horizonte',
+					state: 'MG',
+					neighborhood: 'Cruzeiro',
+					cep: ''
+				}
+			],
+			descriptionTopics: [
+				{
+					title: 'A Festa',
+					text: `Nos cinco dias de folia, o Mercado do Cruzeiro receberá oito bailes temáticos, sendo três voltados para o público infantil. A coordenação geral das festas é da Cria!Cultura, que está cuidando de todos detalhes para que o folião possa brincar com a máxima segurança e conforto.
+	Acessando cada evento, você confere a programação completa!
+
+	Se vc ainda não Programou o seu carnaval, não perde por esperar. O melhor do carnaval de BH ainda está por vir. Vem aí o Carnaval do Distrital, o mais seguro, original e divertido da cidade, com:
+
+	* Chama O Síndico 
+	* Havayanas Usadas 
+	* Então Brilha 
+	* Me Beija que Eu sou Pagodeiro 
+	* Juventude Bronzeada 
+	* Breno Gontijo 
+	* Bartucada 
+	* Bem te viu, Bem te vê 
+	* Baile do Secreto
+	* Bloco da Insanidade
+	* Bailinho do Distrital
+	* Secretinho
+	* Fera Neném 
+	* Trupe Gaia 
+	* Abrapalavra 
+	* Recicloteca 
+	* Quintal da Guegué 
+	* CIA Pé-de-Moleque
+	* e os melhores DJs de BH...
+	
+	Programação em breve: www.sympla.com/carnavaldodistrital
+
+	#bailedosecreto #blocodainsanidade #blocobemteviubemtevê #bailedodistrital #boxentretenimento #secreto #criacultura #loveentretenimento #distrital #mercadodocruzeiro #bailinhododistrital`
+				}
+			]
+		},
+		{
+			name: "Baile do Secreto",
+			photosUrl: ["https://scontent.fsdu6-1.fna.fbcdn.net/v/t31.0-8/16463251_1149336588512497_7022461050773245775_o.jpg?oh=8d8c3ff546ec33338eed409cd5135103&oe=593EDEE8"],
+			date: "27 de abril",
+			startDate: "",
+			endDate: "",
+			nightClub,
+			hour: "22h",
+			descriptionTopics: [
+				{
+					title: 'A Festa',
+					text: `Nos cinco dias de folia, o Mercado do Cruzeiro receberá oito bailes temáticos, sendo três voltados para o público infantil. A coordenação geral das festas é da Cria!Cultura, que está cuidando de todos detalhes para que o folião possa brincar com a máxima segurança e conforto.
+	Acessando cada evento, você confere a programação completa!
+
+	Se vc ainda não Programou o seu carnaval, não perde por esperar. O melhor do carnaval de BH ainda está por vir. Vem aí o Carnaval do Distrital, o mais seguro, original e divertido da cidade, com:
+
+	* Chama O Síndico 
+	* Havayanas Usadas 
+	* Então Brilha 
+	* Me Beija que Eu sou Pagodeiro 
+	* Juventude Bronzeada 
+	* Breno Gontijo
+	* Bartucada 
+	* Bem te viu, Bem te vê 
+	* Baile do Secreto
+	* Bloco da Insanidade
+	* Bailinho do Distrital
+	* Secretinho
+	* Fera Neném 
+	* Trupe Gaia 
+	* Abrapalavra 
+	* Recicloteca 
+	* Quintal da Guegué 
+	* CIA Pé-de-Moleque
+	* e os melhores DJs de BH...
+
+	Programação em breve: www.sympla.com/carnavaldodistrital
+
+	#bailedosecreto #blocodainsanidade #blocobemteviubemtevê #bailedodistrital #boxentretenimento #secreto #criacultura #loveentretenimento #distrital #mercadodocruzeiro #bailinhododistrital`
+				}
+			]
+		}
+
+	]
+
 	partiesList.forEach(item => Parties.insert(item))
 }
 

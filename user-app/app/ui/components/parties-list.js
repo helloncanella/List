@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         elevation   : 1,
         borderWidth : 0.0,
         paddingBottom: 10,
-        borderRadius:10
+        borderRadius:5
     },
     card:{
         flexDirection: 'row',
