@@ -26,10 +26,10 @@ export class PartiesList extends Component {
             <TouchableHighlight onPress={goToParty} {...pressStyle}>
                 <View style={card}>
                     <View style={partyContainer}>
-                        <Image style={imageDimensions(0.9)} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+                        <Image style={[imageDimensions(0.9), image]} source={{ uri: photosUrl[0] }} resizeMode="cover" />
                         <View style={grid}>
                             <Text style={partyName}>{name}</Text>
-                            <Text style={partyDay}>{date}- {hour}</Text>
+                            <Text style={partyDay}>{date+' - '+hour}</Text>
                         </View>
                     </View>
                 </View>
@@ -72,17 +72,22 @@ export default createContainer(() => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        position: 'relative',
+        position: 'relative', 
         zIndex: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingTop: 10
     },
     partyContainer: {
         marginBottom: 30,
-        justifyContent: 'center',
+        elevation   : 1,
+        borderWidth : 0.0,
+        paddingBottom: 10,
+        borderRadius:10
     },
     card:{
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+       
     },
     background: {
         backgroundColor: 'white'
