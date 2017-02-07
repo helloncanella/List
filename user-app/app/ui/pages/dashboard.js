@@ -22,9 +22,7 @@ export default class Dashboard extends Component {
         const {tabBarUnderlineStyle} = styles
         return (
             <TabsWrapper>
-                <PartiesList navigator= { this.props.navigator } tabLabel='local-bar' />
-                <Notifications navigator= { this.props.navigator } tabLabel='event-note' />
-                <Notifications navigator= { this.props.navigator } tabLabel='favorite' />
+                <PartiesList navigator= { this.props.navigator } tabLabel='event-note' />
                 <Notifications navigator= { this.props.navigator } tabLabel='notifications' />                              
             </TabsWrapper>
         )

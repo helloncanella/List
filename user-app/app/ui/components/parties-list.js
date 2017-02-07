@@ -17,18 +17,20 @@ export class PartiesList extends Component {
     }
 
     renderParty(party) {
-        const {image, text, partyContainer, partyName, partyDay} = styles
+        const {image, text, partyContainer, partyName, partyDay, card} = styles
             , {photosUrl, name, address, date, hour, canvas, _id: id} = party
             , goToParty = this.goToParty.bind(this, id)
 
 
         return (
             <TouchableHighlight onPress={goToParty} {...pressStyle}>
-                <View style={partyContainer}>
-                    <Image style={imageDimensions()} source={{ uri: photosUrl[0] }} resizeMode="cover" />
-                    <View style={grid}>
-                        <Text style={partyName}>{name}</Text>
-                        <Text style={partyDay}>{date}- {hour}</Text>
+                <View style={card}>
+                    <View style={partyContainer}>
+                        <Image style={imageDimensions(0.9)} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+                        <View style={grid}>
+                            <Text style={partyName}>{name}</Text>
+                            <Text style={partyDay}>{date}- {hour}</Text>
+                        </View>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -38,9 +40,6 @@ export class PartiesList extends Component {
     render() {
         const {container, text, background} = styles
             , { loadingParties } = this.props
-
-
-
 
         return (
             <View style={[background, container]}>
@@ -78,7 +77,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     partyContainer: {
-        marginBottom: 15,
+        marginBottom: 30,
+        justifyContent: 'center',
+    },
+    card:{
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     background: {
         backgroundColor: 'white'

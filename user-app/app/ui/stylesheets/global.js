@@ -24,8 +24,8 @@ export const pressStyle = {
     activeOpacity: 0.7
 }
 
-export function imageDimensions (aspectRatio=4/3) {
-    const windowWidth = Dimensions.get("window").width
+export function imageDimensions (widthLimit=1, aspectRatio=4/3) {
+    const windowWidth = Dimensions.get("window").width * widthLimit
     
     return {
         width: windowWidth,
