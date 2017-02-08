@@ -75,6 +75,7 @@ const registerHandler = () => {
         services: {
           facebook: fields
         },
+        roles:['guest'],
         profile: { name: identity.name },
         parties: [],
         emails: [{

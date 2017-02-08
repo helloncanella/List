@@ -12,6 +12,7 @@ export const updateParty = (partyId, dataUpdate) => {
     Parties.update({ _id: partyId }, { $set: dataUpdate })
 }
 
+
 export const removeFromCollection = (item, collection) => {
     collection = [].concat(collection)
     

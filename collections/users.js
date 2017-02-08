@@ -4,7 +4,7 @@ import Parties from '/collections/parties.js'
 import { updateUser, updateParty } from '/server/imports/helpers.js'
 
 //creating a default promoter
-if (Meteor.users.find({ "role": "promoter" }).count() === 0) {
+if (Meteor.users.find({ "roles": "promoter" }).count() === 0) {
 
     const partyId = Parties.findOne()._id
 
@@ -18,8 +18,7 @@ if (Meteor.users.find({ "role": "promoter" }).count() === 0) {
     const userId = Accounts.createUser(options)
 
     const customData = {
-        role: 'promoter',
-        parties: [partyId]
+        roles: ['employee','promoter'],
     } 
 
     updateUser(userId, customData)
