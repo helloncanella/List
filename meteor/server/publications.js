@@ -16,5 +16,5 @@ Meteor.publish('loggedUser', function() {
 });
 
 Meteor.publish('users.socialData', function() {
-  return Users.find({}, {'services':1}) //TODO: Include picture
+  return Users.find({}, {fields:{'services':1}}) //TODO: Include picture
 });  
