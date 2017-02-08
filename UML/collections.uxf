@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>286</x>
+      <x>297</x>
       <y>55</y>
       <w>231</w>
       <h>187</h>
@@ -27,7 +27,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>55</x>
+      <x>66</x>
       <y>231</y>
       <w>319</w>
       <h>297</h>
@@ -41,7 +41,7 @@ m2=1..few
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>198</x>
+      <x>209</x>
       <y>231</y>
       <w>209</w>
       <h>264</h>
@@ -55,7 +55,7 @@ m2=1..few
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>407</x>
+      <x>418</x>
       <y>231</y>
       <w>396</w>
       <h>352</h>
@@ -69,7 +69,7 @@ m2=1..many
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>11</x>
+      <x>22</x>
       <y>506</y>
       <w>110</w>
       <h>33</h>
@@ -80,7 +80,7 @@ m2=1..many
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>154</x>
+      <x>165</x>
       <y>473</y>
       <w>110</w>
       <h>33</h>
@@ -91,7 +91,7 @@ m2=1..many
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>682</x>
+      <x>693</x>
       <y>825</y>
       <w>110</w>
       <h>33</h>
@@ -102,7 +102,7 @@ m2=1..many
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>726</x>
+      <x>737</x>
       <y>737</y>
       <w>88</w>
       <h>110</h>
@@ -116,7 +116,7 @@ m2=1..many
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>891</x>
+      <x>902</x>
       <y>165</y>
       <w>121</w>
       <h>143</h>
@@ -130,7 +130,7 @@ m2=1..squillions
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>264</x>
+      <x>275</x>
       <y>231</y>
       <w>154</w>
       <h>418</h>
@@ -143,7 +143,7 @@ m2=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>539</x>
+      <x>550</x>
       <y>561</y>
       <w>495</w>
       <h>187</h>
@@ -163,7 +163,7 @@ m2=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>715</x>
+      <x>726</x>
       <y>66</y>
       <w>440</w>
       <h>110</h>
@@ -181,7 +181,7 @@ m2=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>55</x>
+      <x>66</x>
       <y>627</y>
       <w>440</w>
       <h>187</h>
@@ -201,17 +201,18 @@ m2=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>693</x>
+      <x>704</x>
       <y>286</y>
       <w>539</w>
-      <h>121</h>
+      <h>132</h>
     </coordinates>
     <panel_attributes>**Notification**
 --
 - sender: { collection: string, _id: string, name:string, photoUrl:string}
 - receiver: { collection: string, _id: string }
 - message: string
-- customData: object</panel_attributes>
+- customData: object
+- timeStamp: string</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
