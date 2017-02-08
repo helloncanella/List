@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, StatusBar } from 'react-native'
 import PartiesList from 'ui/components/parties-list.js'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { grid, color } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
-import TabsWrapper from 'ui/components/tabs-wrapper.js'
+import TabsWrapper from 'ui/components/tabs-wrapper.js' 
 import Notifications from 'ui/components/notifications.js'
 
 export default class Dashboard extends Component {
@@ -22,11 +22,11 @@ export default class Dashboard extends Component {
         const {tabBarUnderlineStyle} = styles
         return (
             <TabsWrapper>
-                <PartiesList navigator= { this.props.navigator } tabLabel='event-note' />
-                <Notifications navigator= { this.props.navigator } tabLabel='notifications' />                              
+                <PartiesList navigator={this.props.navigator} tabLabel='event-note' />
+                <Notifications navigator={this.props.navigator} tabLabel='notifications' />
             </TabsWrapper>
         )
-            
+
     }
 
     render() {
@@ -35,6 +35,7 @@ export default class Dashboard extends Component {
             , Tabs = this.tabs.bind(this)
         return (
             <View style={container}>
+                <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <TopMenu />
                 <Tabs />
             </View>
@@ -50,11 +51,12 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        backgroundColor: 'white'
     },
-    tabBarUnderlineStyle:{
-        borderWidth:0,
-        height:0
+    tabBarUnderlineStyle: {
+        borderWidth: 0,
+        height: 0
     }
 });
 

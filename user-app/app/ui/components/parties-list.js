@@ -16,34 +16,49 @@ export class PartiesList extends Component {
         this.props.navigator.push({ name: 'party', id })
     }
 
-    renderParty(party) {
-        const {image, text, partyContainer, partyName, partyDay, card, nightclubStyle, nightclubNameStyle, thumbnail, addressStyle} = styles
-            , {photosUrl, name, date, hour, canvas, _id: id, nightclub} = party
-            
-            console.log(party.nightclub, party.nightclub.addresses[0])
-            
-            const {name: nightclubName, logoUrl: nightclubLogo} = nightclub
-            , {city, neighborhood} = party.nightclub.addresses ? party.nightclub.addresses[0] : {}
-            , goToParty = this.goToParty.bind(this, id)
-
+    nightclub(nightclubData) {
+        const {nightclubNameStyle, thumbnail, nightclubStyle, addressStyle} = styles
+            , {name: nightclubName, logoUrl: nightclubLogo, addresses} = nightclubData
+            , {city, neighborhood} = addresses[0]
 
         return (
-            <TouchableHighlight onPress={goToParty} {...pressStyle}>
+            <View style={[nightclubStyle, grid]}>
+                <Image style={thumbnail} source={{ uri: nightclubLogo }} />
+                <View>
+                    <Text style={nightclubNameStyle}>{nightclubName}</Text>
+                    <Text style={addressStyle}>{neighborhood + ' - ' + city}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    party(partyData) {
+        const {image, text, partyName, partyDay} = styles
+            , {photosUrl, name, date, hour, canvas,} = partyData
+
+        return (
+            <View>
+                <Image style={[imageDimensions(0.9), image]} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+                <View style={grid}>
+                    <Text style={partyName}>{name}</Text>
+                    <Text style={partyDay}>{date + ' - ' + hour}</Text>
+                </View>
+            </View>
+        ) 
+    }
+
+    renderParty(party) {
+        const {partyContainer, card} = styles            
+            , goToParty = this.goToParty.bind(this, party._id)
+
+        const NightclubInfo = this.nightclub.bind(this, party.nightclub)
+            , PartyInfo = this.party.bind(this, party)
+
+        return (
+            <TouchableHighlight onPress={goToParty} {...pressStyle} style={partyContainer}>
                 <View style={card}>
-                    <View style={partyContainer}>
-                        <View style={[nightclubStyle, grid]}>
-                            <Image style={thumbnail} source={{ uri: nightclubLogo }}/>
-                            <View>
-                                <Text style={nightclubNameStyle}>{nightclubName}</Text>
-                                <Text style={addressStyle}>{neighborhood+' - '+city}</Text>
-                            </View>
-                        </View>
-                        <Image style={[imageDimensions(0.9), image]} source={{ uri: photosUrl[0] }} resizeMode="cover" />
-                        <View style={grid}>
-                            <Text style={partyName}>{name}</Text>
-                            <Text style={partyDay}>{date + ' - ' + hour}</Text>
-                        </View>
-                    </View>
+                    <NightclubInfo />
+                    <PartyInfo />
                 </View>
             </TouchableHighlight>
         )
@@ -89,31 +104,31 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 10
     },
-    partyContainer: {
+    card: {
         marginBottom: 30,
         elevation: 1,
         borderWidth: 0.0,
         paddingBottom: 10,
         borderRadius: 5
     },
-    nightclubStyle:{
+    nightclubStyle: {
         flexDirection: 'row',
         alignItems: 'center'
     },
-    addressStyle:{
-        fontSize: typography.normal
+    addressStyle: {
+        fontSize: typography.small
     },
-    nightclubNameStyle:{
+    nightclubNameStyle: {
         fontSize: typography.normal,
         color: color.primary
     },
-    thumbnail:{ 
+    thumbnail: {
         width: 55,
         height: 55,
         borderRadius: 27.5,
         marginRight: 10
     },
-    card: {
+    partyContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
 
@@ -121,15 +136,13 @@ const styles = StyleSheet.create({
     background: {
         backgroundColor: 'white'
     },
-
     partyName: {
-        fontSize: typography.big,
+        fontSize: 25,
         color: color.primary
     },
     partyDay: {
         fontSize: typography.normal
     }
-
 });
 
 

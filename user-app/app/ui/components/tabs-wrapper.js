@@ -9,7 +9,7 @@ export default class TabsWrapper extends Component {
         const {container} = styles
 
         return (
-            <ScrollableTabView  style={container} renderTabBar={() => <TabBar />}>
+            <ScrollableTabView  style={container} tabBarPosition="bottom" renderTabBar={() => <TabBar />}>
                 {this.props.children}
             </ScrollableTabView>
         );
@@ -68,7 +68,8 @@ class TabBar extends Component {
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     },
     tab: {
         flex: 1,
@@ -78,8 +79,8 @@ const styles = StyleSheet.create({
     },
     tabs: {
         flexDirection: 'row',
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: 15,
+        paddingBottom: 15,
         borderWidth: 1,
         borderTopWidth: 0,
         borderLeftWidth: 0,

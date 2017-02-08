@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor'
 
 let Nightclubs = new Meteor.Collection('nightclubs')
 
-//creating a default promoter
+//creating a default nightclub
 if (Nightclubs.find().count() === 0) {
 
     const promoter = Meteor.users.findOne({roles:'promoter'}) || {}

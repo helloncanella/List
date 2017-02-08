@@ -8,7 +8,7 @@ export const color = {
 }
 
 export const typography = {
-    small: 13,
+    small: 15,
     normal: 18,
     big: 30,
     huge: 70, 
