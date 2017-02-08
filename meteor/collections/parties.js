@@ -5,7 +5,7 @@ const Parties = new Meteor.Collection('parties')
 
 
 if (Parties.find().count() === 0) {
-	const nightClub = Nightclubs.findOne({}, { fields: { name: 1, _id: 1, logoUrl: 1, addresses: 1 } })
+	const nightclub = Nightclubs.findOne({}, { fields: { name: 1, _id: 1, logoUrl: 1, addresses: 1 } })
 
 	const partiesList = [
 		 
@@ -16,7 +16,7 @@ if (Parties.find().count() === 0) {
 			startDate: "",
 			endDate: "",
 			hour: "22h",
-			nightClub,
+			nightclub,
 			addresses: [
 				{
 					street: 'R. Opala',
@@ -67,7 +67,7 @@ if (Parties.find().count() === 0) {
 			date: "27 de abril",
 			startDate: "",
 			endDate: "",
-			nightClub,
+			nightclub,
 			hour: "22h",
 			descriptionTopics: [
 				{
@@ -88,7 +88,7 @@ if (Parties.find().count() === 0) {
 	* Baile do Secreto
 	* Bloco da Insanidade
 	* Bailinho do Distrital
-	* Secretinho
+	* Secretinho 
 	* Fera Neném 
 	* Trupe Gaia 
 	* Abrapalavra 

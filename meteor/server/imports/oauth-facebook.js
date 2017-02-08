@@ -49,7 +49,7 @@ const registerHandler = () => {
     const existingUser = Meteor.users.findOne({ 'services.facebook.id': identity.id });
 
     let userId
-        , email = identity.email || Math.random() //Math.random() -> trying to guarantee the emails uniquess ( TODO:  REMOVE GAMBIARRA! :) ) 
+      , email = identity.email || Math.random() //Math.random() -> trying to guarantee the emails uniquess ( TODO:  REMOVE GAMBIARRA! :) ) 
 
     if (existingUser) {
       userId = existingUser._id;
@@ -62,7 +62,7 @@ const registerHandler = () => {
         prefixedData[`services.facebook.${key}`] = val;
       });
 
-      prefixedData.emails =  { address: email, verified: true }
+      prefixedData.emails = { address: email, verified: true }
 
       Meteor.users.update({ _id: userId }, {
         $set: prefixedData
@@ -75,7 +75,7 @@ const registerHandler = () => {
         services: {
           facebook: fields
         },
-        roles:['guest'],
+        roles: ['guest'],
         profile: { name: identity.name },
         parties: [],
         emails: [{

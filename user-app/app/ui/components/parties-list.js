@@ -17,8 +17,13 @@ export class PartiesList extends Component {
     }
 
     renderParty(party) {
-        const {image, text, partyContainer, partyName, partyDay, card} = styles
-            , {photosUrl, name, address, date, hour, canvas, _id: id} = party
+        const {image, text, partyContainer, partyName, partyDay, card, nightclubStyle, nightclubNameStyle, thumbnail, addressStyle} = styles
+            , {photosUrl, name, date, hour, canvas, _id: id, nightclub} = party
+            
+            console.log(party.nightclub, party.nightclub.addresses[0])
+            
+            const {name: nightclubName, logoUrl: nightclubLogo} = nightclub
+            , {city, neighborhood} = party.nightclub.addresses ? party.nightclub.addresses[0] : {}
             , goToParty = this.goToParty.bind(this, id)
 
 
@@ -26,10 +31,17 @@ export class PartiesList extends Component {
             <TouchableHighlight onPress={goToParty} {...pressStyle}>
                 <View style={card}>
                     <View style={partyContainer}>
+                        <View style={[nightclubStyle, grid]}>
+                            <Image style={thumbnail} source={{ uri: nightclubLogo }}/>
+                            <View>
+                                <Text style={nightclubNameStyle}>{nightclubName}</Text>
+                                <Text style={addressStyle}>{neighborhood+' - '+city}</Text>
+                            </View>
+                        </View>
                         <Image style={[imageDimensions(0.9), image]} source={{ uri: photosUrl[0] }} resizeMode="cover" />
                         <View style={grid}>
                             <Text style={partyName}>{name}</Text>
-                            <Text style={partyDay}>{date+' - '+hour}</Text>
+                            <Text style={partyDay}>{date + ' - ' + hour}</Text>
                         </View>
                     </View>
                 </View>
@@ -72,22 +84,39 @@ export default createContainer(() => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        position: 'relative', 
+        position: 'relative',
         zIndex: 10,
         justifyContent: 'center',
         paddingTop: 10
     },
     partyContainer: {
         marginBottom: 30,
-        elevation   : 1,
-        borderWidth : 0.0,
+        elevation: 1,
+        borderWidth: 0.0,
         paddingBottom: 10,
-        borderRadius:5
+        borderRadius: 5
     },
-    card:{
+    nightclubStyle:{
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    addressStyle:{
+        fontSize: typography.normal
+    },
+    nightclubNameStyle:{
+        fontSize: typography.normal,
+        color: color.primary
+    },
+    thumbnail:{ 
+        width: 55,
+        height: 55,
+        borderRadius: 27.5,
+        marginRight: 10
+    },
+    card: {
         flexDirection: 'row',
         justifyContent: 'center',
-       
+
     },
     background: {
         backgroundColor: 'white'
