@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, ListView, Image, TouchableHighlight } from 'react-native'
-import {typography, color, grid, pressStyle} from '/ui/stylesheets/global.js'
+import {typography, color, grid, pressStyle} from 'ui/stylesheets/global.js'
 
 const rowHasChanged = (r1, r2) => r1 !== r2
     , ds = new ListView.DataSource({ rowHasChanged })
@@ -15,18 +15,19 @@ export default class List extends Component {
         } 
     }
 
-    renderRow({primaryText, headerText = '', secondaryText = '', image, payload}) {
+    renderRow({primaryText, headerText = '', secondaryText = '', image, payload, style: customStyle = {}}) {
 
-        const {thumbnail, row, secondaryTextStyle, primaryTextStyle, headerStyle} = styles
+        const {thumbnail, row, secondaryTextStyle, primaryTextStyle, headerStyle, textContainer} = styles
             , touchProps = this.touchProps()
             , {onSelectItem} = this.props
             , {big} = typography
 
+
         return (
             <TouchableHighlight {...touchProps} onPress={() => onSelectItem(payload)}>
-                <View style={row}>
+                <View style={[row, customStyle]} >
                     {image ? <Image style={thumbnail} source={{ uri: image }} /> : null}
-                    <View>
+                    <View style={textContainer}>
                         {headerText ? <Text style={headerStyle}>{headerText}</Text> : null}
                         <Text style={primaryTextStyle}>{primaryText}</Text>
                         {secondaryText ? <Text style={secondaryTextStyle}>{secondaryText}</Text> : null}
@@ -72,17 +73,20 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         marginRight: 10
     },
+    textContainer:{
+        flex: 2/3
+    },
     headerStyle: {
         marginBottom: 2,
         fontSize: typography.small,
         color: color.silentText
     },
     secondaryTextStyle: {
-        fontSize: typography.small,
+        fontSize: 13,
         color: color.silentText
     },
     primaryTextStyle: {
-        fontSize: typography.normal,
+        fontSize: typography.small,
         color: color.primary,
         marginBottom: 3
     }

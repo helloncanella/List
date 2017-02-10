@@ -1,31 +1,36 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { database } from '/library/database'
-import List from '/ui/components/list.js'
+import { database } from 'library/database.js'
+import { color } from 'ui/stylesheets/global.js'
+import List from 'ui/components/list.js'
 
 export class Notifications extends Component {
-	
-	formatedTime(){
+
+	pastTime() {
 		return '1 min. atrás'
 	}
 
 	onSelectNotification(notificationId) {
-
+		alert(notificationId)
 	}
 
-	formatedNotifications(){
-		return this.props.notification.map((notification)=>{
+	formatedNotifications() {
 
-			const {_id:notificationId, message, sender, timeStamp} = notification
-			
+		return this.props.notifications.map(notification => {
+			const {_id: notificationId, message, sender, timeStamp, status, unread} = notification
+				, customStyle = {
+					backgroundColor: unread ?  color.unreadNotification : 'transparent'
+				}
+
 			return {
-				image: notification.sender.image, 
-				primaryText: message, 
-				secondaryText, 
-				payLoad: notification._id
+				image: sender.imageUrl,
+				primaryText: message,
+				secondaryText: this.pastTime(timeStamp),
+				payload: notificationId,
+				style: customStyle
 			}
-
 		})
+
 	}
 
 	render() {
@@ -35,7 +40,7 @@ export class Notifications extends Component {
 
 		return (
 			<View style={container}>
-				<List data={}></List>
+				<List data={notifications} onSelectItem={onSelectItem}></List>
 			</View>
 		);
 	}
@@ -45,6 +50,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	}
+
 });
 
 Notifications.propTypes = {}
@@ -52,7 +58,8 @@ Notifications.propTypes = {}
 export default database.createContainer((props) => {
 	return {
 		notifications: [
-			{}
+			{ _id: '123456', unread: true, message: 'Você não recebeu nenhum desconto!', sender: { imageUrl: 'https://goo.gl/RhKWbz' }, timeStamp: '123456' },
+			{ _id: '123456', unread: false, message: 'Você é um lixo, mas toma aí 5% de desconto', sender: { imageUrl: 'https://goo.gl/RhKWbz' }, timeStamp: '123456' }
 		]
 	}
-})
+}, Notifications)

@@ -4,7 +4,8 @@ export const color = {
     primary: '#D81B60',
     secondary: '#424242',
     borderLine: '#EEEEEE',
-    silentText: '#757575'
+    silentText: '#757575',
+    unreadNotification: 'hsl(0, 0%, 95%)'
 }
 
 export const typography = {
