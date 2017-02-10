@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, Navigator } from 'react-native'
 import Login from 'ui/pages/login.js'
-import PartUsersList from 'ui/pages/party-users-list.js'
+import Dashboard from 'ui/pages/dashboard.js'
+import PartyUsersList from 'ui/pages/party-users-list.js'
 
 
 export class Navigation extends Component {
@@ -15,7 +16,7 @@ export class Navigation extends Component {
         let initialRoute
 
         if (this.props.userIsLogged)
-            initialRoute = { name: 'party-users-list' }
+            initialRoute = { name: 'dashboard' }
         else
             initialRoute = { name: 'login' }
 
@@ -26,8 +27,11 @@ export class Navigation extends Component {
         let component
 
         switch (route.name) {
+            case 'dashboard':
+                component = <Dashboard navigator={navigator}/>
+                break;
             case 'party-users-list':
-                component = <PartUsersList navigator={navigator} />
+                component = <PartyUsersList navigator={navigator} partyId={route.partyId} />
                 break;
             case 'login':
             default:

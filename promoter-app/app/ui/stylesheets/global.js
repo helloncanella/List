@@ -4,11 +4,12 @@ export const color = {
     primary: '#D81B60',
     secondary: '#424242',
     borderLine: '#EEEEEE',
-    silentText: '#757575'
+    silentText: '#757575',
+    unreadNotification: 'hsl(0, 0%, 95%)'
 }
 
 export const typography = {
-    small: 13,
+    small: 15,
     normal: 18,
     big: 30,
     huge: 70, 
@@ -24,8 +25,8 @@ export const pressStyle = {
     activeOpacity: 0.7
 }
 
-export function imageDimensions (aspectRatio=4/3) {
-    const windowWidth = Dimensions.get("window").width
+export function imageDimensions (widthLimit=1, aspectRatio=4/3) {
+    const windowWidth = Dimensions.get("window").width * widthLimit
     
     return {
         width: windowWidth,

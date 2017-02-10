@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { grid, color, typography, pressStyle } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
 import { openFacebook } from 'library/helpers.js'
+import ReturnMenu from 'ui/components/return-menu.js'
 
 class StartUp extends Component {
 
@@ -89,28 +90,13 @@ class StartUp extends Component {
         )
     }
 
-    topBar() {
-        //TODO: Move to specialized component
-        const {topBar, topBarText} = styles
-            , {name: partyName = ''} = this.props.party
-            , Logout = () => this.logout()
-
-        return (
-            <View style={[topBar, grid]}>
-                <Text style={topBarText}>{partyName}</Text>
-                <Logout />
-            </View>
-        )
-    }
-
     list() {
         const {container} = styles
-            , TopBar = this.topBar.bind(this)
             , {usersRequesting} = this.props
 
         return (
             <View style={container}>
-                <TopBar />
+                <ReturnMenu navigator={this.props.navigator} />
                 <MeteorComplexListView elements={() => usersRequesting} renderRow={this.renderUser.bind(this)} enableEmptySections={true} />
             </View>
         )
