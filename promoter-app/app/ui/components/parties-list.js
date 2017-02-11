@@ -90,12 +90,9 @@ export default createContainer(() => {
     const partiesSubscription = database.subscribe('parties')
         , nightclubsSubscription = database.subscribe('nightclubs')
     
-    
     const userId = database.userIsLogged() ? database.loggedUser()._id : null
         , nightclub = database.collection('nightclubs').findOne({ promotersId: userId })||{}        
         , parties = database.collection('parties').find({'nightclub._id':nightclub._id})
-
-        
 
     return {
         loadingParties: !partiesSubscription.ready(),

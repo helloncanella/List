@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
-import Meteor, { createContainer, MeteorListView, MeteorComplexListView } from 'react-native-meteor'
 import Loading from 'ui/components/downloading.js'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { grid, color, typography, pressStyle } from 'ui/stylesheets/global.js'
@@ -81,19 +80,16 @@ const styles = StyleSheet.create({
     }
 });
 
-const findUsers = usersList => Meteor.collection('users').find({ _id: { $in: usersList } })
+const findUsers = usersList => database.collection('users').find({ _id: { $in: usersList } })
 
-export default createContainer(props => {
+export default database.createContainer(props => {
 
-    const usersSubscription = Meteor.subscribe("users.socialData")
-        , partiesSubscription = Meteor.subscribe("parties")
+    const usersSubscription = database.subscribe("users.socialData")
+        , partiesSubscription = database.subscribe("parties")
 
-    const userId = Meteor.user() ? Meteor.user()._id : null
-    
-    console.log(userId)
-
-    const party = Meteor.collection("parties").find({ promotersId: userId }) || {}
+    const party = database.collection("parties").findOne({ _id: props.partyId }) || {}
         , {refusedUsers = [], acceptedUsers = [], usersRequesting = [], _id: partyId } = party
+
 
     return {
         userIsLoading: !usersSubscription.ready(),
@@ -101,8 +97,8 @@ export default createContainer(props => {
         refusedUsers: findUsers(refusedUsers).map(user => user._id),
         acceptedUsers: findUsers(acceptedUsers).map(user => user._id),
         usersRequesting: findUsers(usersRequesting),
-        acceptUser: userId => Meteor.call('party.acceptUser', { userId, partyId }),
-        refuseUser: userId => Meteor.call('party.refuseUser', { userId, partyId }),
+        acceptUser: userId => database.call('party.acceptUser', { userId, partyId }),
+        refuseUser: userId => database.call('party.refuseUser', { userId, partyId }),
         navigator: props.navigator
     }
 
@@ -110,6 +106,7 @@ export default createContainer(props => {
 
 
 PartyUsersList.propTypes = {
+    partyId: PropTypes.string.isRequired
 }
 
 

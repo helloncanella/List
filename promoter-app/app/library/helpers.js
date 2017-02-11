@@ -14,3 +14,12 @@ export const openFacebook = function(url) {
     }).catch(err => console.error('An error occurred', err));
 
 }
+
+
+export const age = function(birthday){
+    const today = (new Date()).getTime()
+    
+    birthday = (new Date(birthday)).getTime()
+
+    return Math.floor((today - birthday)/(365*24*3600*1000))
+}

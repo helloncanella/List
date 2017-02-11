@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import {imageDimensions} from 'ui/stylesheets/global.js'
-
+import {imageDimensions, typography, grid, color} from 'ui/stylesheets/global.js'
+import {age, openFacebook} from 'library/helpers.js'
 import SwipeCards from 'react-native-swipe-cards';
+import Card from 'ui/components/card.js'
 
 export default class UsersSwipeCards extends Component {
 
 	card(cardData) {
 		const {_id: userId, services} = cardData
-			, {link, name, picture: image } = services.facebook
-			, picture = image.data.url			
+			, {link, first_name: name, picture: image, birthday } = services.facebook
+			, picture = image.data.url
+			, {text, textContainer, name:nameStyle} = styles			
 
 		return (
-			<View>
+			<Card onPress={()=>openFacebook(link)}>
 				<Image style={imageDimensions(0.9)} source={{ uri: picture }} resizeMode="cover" />
-			</View>
+				<View style={[textContainer, grid]}>
+					<Text style={[text, nameStyle]}>{`${name}, `}</Text>
+					<Text style={[text]}>{`${age(birthday)}`}</Text>
+				</View>
+			</Card>
 		)
 	}
 
@@ -39,8 +45,15 @@ export default class UsersSwipeCards extends Component {
 const styles = StyleSheet.create({
 	card: {
 		justifyContent: 'center',
-		alignItems: 'center',
-		width: 300,
-		height: 300,
+		alignItems: 'center',		
+	},
+	textContainer:{
+		flexDirection: 'row'
+	},
+	text:{
+		fontSize: 22,
+	},
+	name: {
+		color: color.secondary
 	}
 })

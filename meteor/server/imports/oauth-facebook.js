@@ -32,13 +32,14 @@ const registerHandler = () => {
 
 		// The fields we care about (same as Meteor's)
 		const whitelisted = ['id', 'email', 'name', 'first_name',
-			'last_name', 'link', 'gender', 'locale', 'age_range', 'picture', 'photos', 'birthday', 'work'];
+			'last_name', 'link', 'gender', 'locale', 'age_range', 'photos', 'birthday', 'work'];
 
 		// Get our user's identifying information. This also checks if the accessToken
 		// is valid. If not it will error out.
 		const identity = getIdentity(data.accessToken, whitelisted)
 			, picture = getLargePicture(data.accessToken, identity.id) //get large picture
  
+
 
 		// Build our actual data object.
 		const serviceData = {
