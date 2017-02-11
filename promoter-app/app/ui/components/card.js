@@ -5,11 +5,11 @@ import { pressStyle } from 'ui/stylesheets/global.js'
 
 export default class Card extends Component {
     render() {
-        const {onPress, style, children} = this.props
+        const {onPress, style, children, cardStyle} = this.props
       
         return (
             <TouchableHighlight onPress={onPress} {...pressStyle} style={style}>
-                <View style={styles.card}>
+                <View style={[styles.card, cardStyle]}>
                     {children}
                 </View>
             </TouchableHighlight>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         elevation: 1,
         borderWidth: 0.0,
         paddingBottom: 10,
-        borderRadius: 5
+        borderRadius: 5,
     }
 });
 
