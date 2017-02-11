@@ -1,10 +1,15 @@
 import Parties from '../collections/parties.js'
+import Nightclubs from '../collections/nightclubs.js'
 import {Meteor} from 'meteor/meteor'
 
 const Users = Meteor.users
 
 Meteor.publish('parties', function() {
   return Parties.find();
+});
+
+Meteor.publish('nightclubs', function() {
+  return Nightclubs.find();
 });
 
 Meteor.publish('party', function(id) {

@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 import { typography, pressStyle, grid, color, imageDimensions } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
-import { MeteorListView } from 'react-native-meteor'
-
+import { MeteorComplexListView } from 'react-native-meteor'
+import Card from 'ui/components/card.js'
 
 export class PartiesList extends Component {
 
@@ -13,7 +13,7 @@ export class PartiesList extends Component {
     }
 
     goToParty(id) {
-        this.props.navigator.push({ name: 'party-users-list', partyId:id })
+        this.props.navigator.push({ name: 'party-users-list', partyId: id })
     }
 
     nightclub(nightclubData) {
@@ -34,44 +34,42 @@ export class PartiesList extends Component {
 
     party(partyData) {
         const {image, text, partyName, partyDay} = styles
-            , {photosUrl, name, date, hour, canvas,} = partyData
+            , {photosUrl, name, date, hour, canvas, } = partyData
 
         return (
             <View>
-                <Image style={[imageDimensions(0.9), image]} source={{ uri: photosUrl[0] }} resizeMode="cover" />
+                <Image style={imageDimensions(0.9)} source={{ uri: photosUrl[0] }} resizeMode="cover" />
                 <View style={grid}>
                     <Text style={partyName}>{name}</Text>
                     <Text style={partyDay}>{date + ' - ' + hour}</Text>
                 </View>
             </View>
-        ) 
+        )
     }
 
     renderParty(party) {
-        const {partyContainer, card} = styles            
+        const {partyContainer, card} = styles
             , goToParty = this.goToParty.bind(this, party._id)
 
         const NightclubInfo = this.nightclub.bind(this, party.nightclub)
             , PartyInfo = this.party.bind(this, party)
 
         return (
-            <TouchableHighlight onPress={goToParty} {...pressStyle} style={partyContainer}>
-                <View style={card}>
-                    <NightclubInfo />
-                    <PartyInfo />
-                </View>
-            </TouchableHighlight>
+            <Card onPress={goToParty} style={partyContainer}>
+                <NightclubInfo />
+                <PartyInfo />
+            </Card>
         )
     }
 
     render() {
         const {container, text, background} = styles
-            , { loadingParties } = this.props
+            , { loadingParties,  parties} = this.props
 
         return (
             <View style={[background, container]}>
-                <MeteorListView
-                    collection="parties"
+                <MeteorComplexListView
+                    elements={()=>parties}
                     renderRow={this.renderParty}
                     enableEmptySections={true}
                     />
@@ -84,13 +82,24 @@ export class PartiesList extends Component {
 
 }
 
+
 const {createContainer} = database
+
 export default createContainer(() => {
-    const subscription = database.subscribe('parties')
+
+    const partiesSubscription = database.subscribe('parties')
+        , nightclubsSubscription = database.subscribe('nightclubs')
+    
+    
+    const userId = database.userIsLogged() ? database.loggedUser()._id : null
+        , nightclub = database.collection('nightclubs').findOne({ promotersId: userId })||{}        
+        , parties = database.collection('parties').find({'nightclub._id':nightclub._id})
+
+        
 
     return {
-        loadingParties: !subscription.ready(),
-        // parties: database.collection('parties').find()
+        loadingParties: !partiesSubscription.ready(),
+        parties 
     }
 
 }, PartiesList)

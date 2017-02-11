@@ -17,7 +17,7 @@ export default class Dashboard extends Component {
                 <Icon name="menu" color={color.primary} size={30} />
             </View>
         )
-    }
+    }    
 
     tabs() {
         const {tabBarUnderlineStyle} = styles

@@ -8,7 +8,7 @@ if (Meteor.users.find({ "roles": "promoter" }).count() === 0) {
 
     const partyId = Parties.findOne()._id
 
-    const options = {
+    const options = { 
         username: "fernandogomes",
         password: "fernandogomes",
         email: "fernandogomes@at.com",

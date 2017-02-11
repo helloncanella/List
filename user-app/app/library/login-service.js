@@ -28,7 +28,7 @@ export default class LoginService {
         }
 
         return LoginManager
-            .logInWithReadPermissions(['public_profile'])
+            .logInWithReadPermissions(['public_profile', 'user_photos', 'user_birthday', 'email'])
             .then(onSucess)
             .catch(err => { console.log(err); throw err })
 

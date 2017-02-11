@@ -7,104 +7,26 @@ import { grid, color, typography, pressStyle } from 'ui/stylesheets/global.js'
 import { database } from 'library/database.js'
 import { openFacebook } from 'library/helpers.js'
 import ReturnMenu from 'ui/components/return-menu.js'
+import UsersSwipeCards from 'ui/components/users-swipe-cards.js'
 
-class StartUp extends Component {
 
-    icon(action, userId) {
-        let callback, iconName, color = 'gray'
-
-        if (action === 'accept') {
-            callback = this.props.acceptUser.bind(this, userId)
-            iconName = 'check'
-            color = this.props.acceptedUsers.indexOf(userId) > - 1 && 'green' || color
-        } else {
-            callback = this.props.refuseUser.bind(this, userId)
-            iconName = 'close'
-            color = this.props.refusedUsers.indexOf(userId) > - 1 && 'red' || color
-        }
-
-        return (
-            <TouchableHighlight onPress={callback} underlayColor='transparent'>
-                <Icon name={iconName} size={45} color={color} />
-            </TouchableHighlight>
-        )
+class PartyUsersList extends Component {
+  
+    content(){
+        const {usersRequesting} = this.props
+        return this.props.userIsLoading ? <Loading /> : <UsersSwipeCards users={usersRequesting} />
     }
 
-    buttons(userId) {
-        const Accept = this.icon.bind(this, 'accept', userId)
-            , Refuse = this.icon.bind(this, 'refuse', userId)
-            , {buttonsContainer} = styles
-
-        return (
-            <View style={buttonsContainer}>
-                <Accept />
-                <Refuse />
-            </View>
-        )
-    }
-
-
-
-    profile({link, name, picture}) {
-        const {thumbnail, userName, row, social, socialTouch} = styles
-            , onPress = () => openFacebook(link)
-
-        return (
-            <TouchableHighlight {...pressStyle} onPress={onPress} style={socialTouch}>
-                <View style={social}>
-                    <Image style={thumbnail} source={{ uri: picture }} />
-                    <Text style={userName}>{name}</Text>
-                </View>
-            </TouchableHighlight>
-        )
-    }
-
-    renderUser(user) {
-        const {_id: userId, services} = user
-            , {link, name, picture:image } = services.facebook
-            , picture = image.data.url
-            , Buttons = this.buttons.bind(this, userId)
-            , Profile = this.profile.bind(this, {link, name, picture})
-            , {row} = styles
-
-        return (
-            <View style={row}>
-                <Profile />
-                <Buttons />
-            </View>
-        )
-    }
-
-    logout() {
-        //TODO: Move to specialized component
-        const {navigator} = this.props
-            , signout = () => {
-                database.logout()
-                navigator.push({ name: 'login' })
-            }
-
-        return (
-            <TouchableHighlight onPress={signout} underlayColor='transparent'>
-                <Text style={{}}>logout</Text>
-            </TouchableHighlight>
-        )
-    }
-
-    list() {
-        const {container} = styles
-            , {usersRequesting} = this.props
+    render() {
+        const {container} = styles            
+            , Content = this.content.bind(this)
 
         return (
             <View style={container}>
                 <ReturnMenu navigator={this.props.navigator} />
-                <MeteorComplexListView elements={() => usersRequesting} renderRow={this.renderUser.bind(this)} enableEmptySections={true} />
+                <Content />
             </View>
-        )
-    }
-
-    render() {
-        const List = () => this.list()
-        return this.props.userIsLoading ? <Loading /> : <List />
+        ) 
     }
 }
 
@@ -167,7 +89,10 @@ export default createContainer(props => {
         , partiesSubscription = Meteor.subscribe("parties")
 
     const userId = Meteor.user() ? Meteor.user()._id : null
-        , party = Meteor.collection("parties").findOne({ promoters: userId }) || {}
+    
+    console.log(userId)
+
+    const party = Meteor.collection("parties").find({ promotersId: userId }) || {}
         , {refusedUsers = [], acceptedUsers = [], usersRequesting = [], _id: partyId } = party
 
     return {
@@ -181,10 +106,10 @@ export default createContainer(props => {
         navigator: props.navigator
     }
 
-}, StartUp)
+}, PartyUsersList)
 
 
-StartUp.propTypes = {
+PartyUsersList.propTypes = {
 }
 
 

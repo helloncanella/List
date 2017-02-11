@@ -101,7 +101,7 @@ if (Parties.find().count() === 0) {
 
 	#bailedosecreto #blocodainsanidade #blocobemteviubemtevê #bailedodistrital #boxentretenimento #secreto #criacultura #loveentretenimento #distrital #mercadodocruzeiro #bailinhododistrital`
 				}
-			]
+			] 
 		}
 
 	]

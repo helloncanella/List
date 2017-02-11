@@ -14,7 +14,23 @@ export default class Dashboard extends Component {
         return (
             <View style={[grid, topMenu]}>
                 <Icon name="menu" color={color.primary} size={30} />
+                {this.logout()}
             </View>
+        )
+    }
+
+    logout() {
+        //TODO: Move to specialized component
+        const {navigator} = this.props
+            , signout = () => {
+                database.logout()
+                navigator.push({ name: 'login' })
+            }
+
+        return (
+            <TouchableHighlight onPress={signout} underlayColor='transparent'>
+                <Text style={{}}>logout</Text>
+            </TouchableHighlight>
         )
     }
 
