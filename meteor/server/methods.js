@@ -31,7 +31,7 @@ Meteor.methods({
 
     },
 
-    'party.acceptUser'({partyId, userId}){
+    'party.giveDiscount'({partyId, userId, discount}){
         let {refusedUsers = [], acceptedUsers = []} = Parties.findOne({_id:partyId})
 
         refusedUsers = removeFromCollection(userId , refusedUsers)

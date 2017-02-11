@@ -4,6 +4,7 @@ import { database } from 'library/database.js'
 import Dowloading from 'ui/components/downloading.js'
 import { imageDimensions, grid, typography, color, pressStyle } from 'ui/stylesheets/global.js'
 import BackButton from 'ui/components/back-button.js'
+import ReturnMenu from 'ui/components/return-menu.js'
 
 
 
@@ -79,8 +80,8 @@ class PartyDetails extends Component {
 
         return (
             <View style={container}>
+                <ReturnMenu navigator={this.props.navigator} />
                 <Party />
-                <BackButton navigator={this.props.navigator} style={backButton} />
             </View>
         )
     }

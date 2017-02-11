@@ -10,14 +10,82 @@ import UsersSwipeCards from 'ui/components/users-swipe-cards.js'
 
 
 class PartyUsersList extends Component {
-  
-    content(){
+
+    constructor(){
+        super()
+        this.state = {
+            userFromTopCard: {}
+        }
+    }
+
+    renderDiscountButton({value:discount,quantity}){
+        const {userId} = this.state.userFromTopCard
+            , giveDiscount = this.props.giveDiscount.bind(null, userId, discount)
+
+        return (
+            <View>
+                <TouchableHighlight style={styles.roundButton} onPress={giveDiscount} {...pressStyle}>
+                    <Text>{'-'+discount*100+'%'}</Text>
+                </TouchableHighlight>
+            </View>
+        )
+    }
+
+    discountButtons() {
+        const renderDiscountButton = this.renderDiscountButton.bind(this)
+            , {availableDiscounts} = this.props
+        
+        return (
+            <View>
+                {availableDiscounts.map(renderDiscountButton)}
+            </View>
+        ) 
+    }
+
+    refuseButton() {
+        return <View></View>
+    }
+
+    buttons() {
+        const RefuseButton = this.refuseButton.bind(this)
+            , DiscountButtons = this.discountButtons.bind(this)
+
+        return (
+            <View>
+                <RefuseButton />
+                <DiscountButtons />
+            </View>
+        )
+    }
+
+    setTopCardUser(user){
+        this.setState({userFromTopCard: user})
+    }
+
+    cards() {
         const {usersRequesting} = this.props
-        return this.props.userIsLoading ? <Loading /> : <UsersSwipeCards users={usersRequesting} />
+        return <UsersSwipeCards users={usersRequesting} onNewCard={this.setTopCardUser.bind(this)}/>
+    }
+
+    list() {
+        const Cards = this.cards.bind(this)
+            , Buttons = this.buttons.bind(this)
+
+        return (
+            <View>
+                <Cards />
+                <Buttons />
+            </View>
+        )
+    }
+
+    content() {
+        const List = this.list.bind(this)
+        return this.props.userIsLoading ? <Loading /> : <List />
     }
 
     render() {
-        const {container} = styles            
+        const {container} = styles
             , Content = this.content.bind(this)
 
         return (
@@ -25,7 +93,7 @@ class PartyUsersList extends Component {
                 <ReturnMenu navigator={this.props.navigator} />
                 <Content />
             </View>
-        ) 
+        )
     }
 }
 
@@ -76,7 +144,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     socialTouch: {
-        flex: 2 / 3        
+        flex: 2 / 3
     }
 });
 
@@ -88,16 +156,15 @@ export default database.createContainer(props => {
         , partiesSubscription = database.subscribe("parties")
 
     const party = database.collection("parties").findOne({ _id: props.partyId }) || {}
-        , {refusedUsers = [], acceptedUsers = [], usersRequesting = [], _id: partyId } = party
+        , {refusedUsers = [], usersRequesting = [], _id: partyId } = party
 
 
     return {
         userIsLoading: !usersSubscription.ready(),
         party,
         refusedUsers: findUsers(refusedUsers).map(user => user._id),
-        acceptedUsers: findUsers(acceptedUsers).map(user => user._id),
         usersRequesting: findUsers(usersRequesting),
-        acceptUser: userId => database.call('party.acceptUser', { userId, partyId }),
+        giveDiscount: (userId,discount) => database.call('party.giveDiscount', { userId, discount, partyId }),
         refuseUser: userId => database.call('party.refuseUser', { userId, partyId }),
         navigator: props.navigator
     }

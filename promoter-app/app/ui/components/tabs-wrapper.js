@@ -49,8 +49,7 @@ class TabBar extends Component {
     
     render() {
         return <View style={[styles.tabs, this.props.style]}>
-            {this.props.tabs.map((tab, i) => {
-                console.log(i, this.props.activeTab)
+            {this.props.tabs.map((tab, i) => {              
 
                 return <TouchableOpacity key={tab} onPress={() => this.props.goToPage(i)} style={styles.tab}>
                     <Icon

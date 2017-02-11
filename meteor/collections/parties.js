@@ -9,7 +9,7 @@ if (Parties.find().count() === 0) {
 
 	const partiesList = [
 		 
-		{
+		{ 
 			name: "Carnaval do Distrital",
 			photosUrl: ["https://scontent.fsdu6-1.fna.fbcdn.net/v/t1.0-9/16195353_1296868433721822_4281286116478477370_n.png?oh=0dd16ca232bd84641cbd227bb339f6b8&oe=59452251"],
 			date: "27 de abril",
@@ -17,6 +17,10 @@ if (Parties.find().count() === 0) {
 			endDate: "",
 			hour: "22h",
 			nightclub,
+			availableDiscounts:[
+				{value:0.5, quantity:100},
+				{value:1, quantity:10},
+			],
 			addresses: [
 				{
 					street: 'R. Opala',
@@ -68,6 +72,10 @@ if (Parties.find().count() === 0) {
 			startDate: "",
 			endDate: "",
 			nightclub,
+			availableDiscounts:[
+				{value:0.5, quantity:100},
+				{value:1, quantity:10},
+			],
 			hour: "22h",
 			descriptionTopics: [
 				{

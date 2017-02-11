@@ -15,7 +15,7 @@ export default class UsersSwipeCards extends Component {
 
 		return (
 			<Card onPress={()=>openFacebook(link)}>
-				<Image style={imageDimensions(0.85)} source={{ uri: picture }} resizeMode="cover" />
+				<Image style={imageDimensions(0.9)} source={{ uri: picture }} resizeMode="cover" />
 				<View style={[textContainer, grid]}>
 					<Text style={[text, nameStyle]}>{`${name}, `}</Text>
 					<Text style={[text]}>{`${age(birthday)}`}</Text>
