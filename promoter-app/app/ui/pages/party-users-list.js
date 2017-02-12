@@ -9,23 +9,25 @@ import ReturnMenu from 'ui/components/return-menu.js'
 import UsersSwipeCards from 'ui/components/users-swipe-cards.js'
 
 
+
 class PartyUsersList extends Component {
 
-    constructor(){
+    constructor() {
         super()
         this.state = {
             userFromTopCard: {}
         }
     }
 
-    renderDiscountButton({value:discount,quantity}){
+    renderDiscountButton({value: discount, quantity}) {
         const {userId} = this.state.userFromTopCard
             , giveDiscount = this.props.giveDiscount.bind(null, userId, discount)
+            , {buttonText, roundButton} = styles
 
         return (
-            <View>
+            <View key={discount}>
                 <TouchableHighlight style={styles.roundButton} onPress={giveDiscount} {...pressStyle}>
-                    <Text>{'-'+discount*100+'%'}</Text>
+                    <Text style={buttonText}>{'-' + discount * 100 + '%'}</Text>
                 </TouchableHighlight>
             </View>
         )
@@ -33,17 +35,21 @@ class PartyUsersList extends Component {
 
     discountButtons() {
         const renderDiscountButton = this.renderDiscountButton.bind(this)
-            , {availableDiscounts} = this.props
-        
+            , {availableDiscounts} = this.props.party
+
         return (
-            <View>
+            <View style={styles.directionRow}>
                 {availableDiscounts.map(renderDiscountButton)}
             </View>
-        ) 
+        )
     }
 
     refuseButton() {
-        return <View></View>
+        return (
+            <View style={styles.roundButton}>
+                <Icon name="close" size={typography.big} />
+            </View>
+        )
     }
 
     buttons() {
@@ -51,28 +57,30 @@ class PartyUsersList extends Component {
             , DiscountButtons = this.discountButtons.bind(this)
 
         return (
-            <View>
+            <View style={styles.buttonsContainer}>
                 <RefuseButton />
                 <DiscountButtons />
             </View>
         )
     }
 
-    setTopCardUser(user){
-        this.setState({userFromTopCard: user})
+    setTopCardUser(user) {
+        this.setState({ userFromTopCard: user })
     }
 
     cards() {
         const {usersRequesting} = this.props
-        return <UsersSwipeCards users={usersRequesting} onNewCard={this.setTopCardUser.bind(this)}/>
+        return <UsersSwipeCards users={usersRequesting} onNewCard={this.setTopCardUser.bind(this)} />
     }
 
     list() {
         const Cards = this.cards.bind(this)
             , Buttons = this.buttons.bind(this)
+        
+        const {container, marginTop} = styles
 
         return (
-            <View>
+            <View style={[container, marginTop]}>
                 <Cards />
                 <Buttons />
             </View>
@@ -100,52 +108,40 @@ class PartyUsersList extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        justifyContent: 'center'
     },
-    buttonsContainer: {
-        flexDirection: 'row'
-    },
-    row: {
-        flexDirection: 'row',
-        borderBottomWidth: 1,
-        borderBottomColor: color.borderLine,
-        padding: grid.padding,
-        alignItems: 'center'
-    },
-    thumbnail: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        marginRight: 10
-    },
-    userName: {
-        fontSize: 20/*typography.normal*/,
-        marginBottom: 3,
-        flex: 2 / 3
-    },
-    social: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    topBar: {
-        backgroundColor: 'gray',
-        paddingTop: 10,
-        paddingBottom: 10,
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    topBarText: {
-        color: 'white',
+    buttonText: {
         fontSize: typography.normal,
+        color: 'gray',
     },
-    logout: {
-        color: 'white',
-        fontSize: 15
+    roundButton: {
+        width: 65,
+        height: 65,
+        borderRadius: 32.5,
+        borderWidth: 1,
+        borderColor: 'rgb(204,204,204)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 20
     },
-    socialTouch: {
-        flex: 2 / 3
+    buttonsContainer:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+        paddingBottom:20        
+    },
+    selectedButtonText:{
+        color: 'white'
+    },
+    selectedButton: {
+        backgroundColor: color.primary,
+        borderColor: 'transparent'
+    },
+    directionRow: {
+        flexDirection: 'row',
     }
+
 });
 
 const findUsers = usersList => database.collection('users').find({ _id: { $in: usersList } })
@@ -164,7 +160,7 @@ export default database.createContainer(props => {
         party,
         refusedUsers: findUsers(refusedUsers).map(user => user._id),
         usersRequesting: findUsers(usersRequesting),
-        giveDiscount: (userId,discount) => database.call('party.giveDiscount', { userId, discount, partyId }),
+        giveDiscount: (userId, discount) => database.call('party.giveDiscount', { userId, discount, partyId }),
         refuseUser: userId => database.call('party.refuseUser', { userId, partyId }),
         navigator: props.navigator
     }

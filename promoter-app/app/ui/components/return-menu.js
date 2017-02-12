@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: 'white'
+        backgroundColor: 'transparent'
     },
     iconAlignmentAdjustment:{
         marginLeft:-10
