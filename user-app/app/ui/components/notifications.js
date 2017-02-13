@@ -58,8 +58,8 @@ Notifications.propTypes = {}
 export default database.createContainer((props) => {
 	return {
 		notifications: [
-			{ _id: '123456', unread: true, message: 'Você não recebeu nenhum desconto!', sender: { imageUrl: 'https://goo.gl/RhKWbz' }, timeStamp: '123456' },
-			{ _id: '123456', unread: false, message: 'Você é um lixo, mas toma aí 5% de desconto', sender: { imageUrl: 'https://goo.gl/RhKWbz' }, timeStamp: '123456' }
+			{ _id: '123456', unread: true, message: 'Você recebeu 10% de desconto!', sender: { imageUrl: 'https://goo.gl/RhKWbz' }, timeStamp: '123456' },
+			{ _id: '123456', unread: false, message: 'Você recebeu 5% de desconto', sender: { imageUrl: 'https://goo.gl/RhKWbz' }, timeStamp: '123456' }
 		]
 	}
 }, Notifications)

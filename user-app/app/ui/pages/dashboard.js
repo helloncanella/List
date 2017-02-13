@@ -17,7 +17,7 @@ export default class Dashboard extends Component {
                 {this.logout()}
             </View>
         )
-    }
+    } 
 
     logout() {
         //TODO: Move to specialized component
